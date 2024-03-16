@@ -11,32 +11,31 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class ResultatActivity extends AppCompatActivity {
 
-    Button btnAno;
-    Button btnCrea;
-
+    Button btnReExo, btnReUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_resultat);
 
-        btnAno = (Button) findViewById(R.id.Main_btn_Ano);
-        btnCrea = (Button) findViewById(R.id.Main_btn_crea);
+        btnReExo = (Button) findViewById(R.id.Result_btn_retour_exo);
+        btnReUser = (Button) findViewById(R.id.Result_btn_retour_comptes);
 
-        // TODO : faire la liste des comptes
-        btnAno.setOnClickListener(new View.OnClickListener() {
+        btnReExo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListeExoActivity.class);
+                Intent intent = new Intent(ResultatActivity.this, ListeExoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
 
-        btnCrea.setOnClickListener(new View.OnClickListener() {
+        btnReUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreationDeCompteActivity.class);
+                Intent intent = new Intent(ResultatActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
