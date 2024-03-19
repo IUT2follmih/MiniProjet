@@ -11,7 +11,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.miniprojet.dataBase.DataBaseClient;
+
 public class MainActivity extends AppCompatActivity {
+
+    private DataBaseClient maBase;
 
     Button btnAno;
     Button btnCrea;
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        maBase = DataBaseClient.getInstance(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         btnAno = (Button) findViewById(R.id.Main_btn_Ano);

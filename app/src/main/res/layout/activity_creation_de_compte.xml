@@ -33,7 +33,7 @@
             android:id="@+id/Creation_input_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Creation_login_hint" />
+            android:hint="@string/Creation_nom_hint" />
 
 
         <EditText
@@ -41,8 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="@string/Creation_password_hint"
-            android:inputType="textPassword"/>
+            android:hint="@string/Creation_prenom_hint" />
 
         <TextView
             android:id="@+id/Creation_text_error"

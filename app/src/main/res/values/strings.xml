@@ -4,8 +4,8 @@
     <string name="Main_btn_crea">Crée un compte</string>
     <string name="Main_main_title">Choisir son compte</string>
     <string name="Creation_title">Création d\'un compte</string>
-    <string name="Creation_login_hint">Identifiant</string>
-    <string name="Creation_password_hint">Mot de passe</string>
+    <string name="Creation_nom_hint">Nom</string>
+    <string name="Creation_prenom_hint">Prenom</string>
     <string name="Creation_button_text">Crée mon compte</string>
     <string name="Creation_button_text_retour">Retour</string>
     <string name="List_text">Choisir l\'exercice</string>
