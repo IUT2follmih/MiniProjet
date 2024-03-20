@@ -18,4 +18,6 @@
     <string name="Result_text_name">Nom de L\'EXO</string>
     <string name="Result_text_nbOk">Nombre de réponse juste</string>
     <string name="Result_text_nbError">Nombre de fautes</string>
+    <string name="Template_user_prenom_text">PRENOM</string>
+    <string name="Template_user_nom_text">NOM</string>
 </resources>

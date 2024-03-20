@@ -1,9 +1,13 @@
 package com.example.miniprojet;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,22 +16,58 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.miniprojet.dataBase.DataBaseClient;
+import com.example.miniprojet.dataBase.Users;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private DataBaseClient maBase;
+    private UserAdaptater adaptater;
 
     Button btnAno;
     Button btnCrea;
+    ListView userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        maBase = DataBaseClient.getInstance(getApplicationContext());
         setContentView(R.layout.activity_main);
+
+        maBase = DataBaseClient.getInstance(getApplicationContext());
 
         btnAno = (Button) findViewById(R.id.Main_btn_Ano);
         btnCrea = (Button) findViewById(R.id.Main_btn_crea);
+
+        userList = (ListView) findViewById(R.id.Main_list_users);
+
+        adaptater = new UserAdaptater(this, new ArrayList<Users>());
+        userList.setAdapter(adaptater);
+
+        userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Users user = adaptater.getItem(position);
+
+                Toast.makeText(MainActivity.this, "Click : " + user.getPrenom(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        userList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // Récupération de la tâche cliquée à l'aide de l'adapter
+                Users user = adaptater.getItem(position);
+
+                // Message
+                Toast.makeText(MainActivity.this, "LongClick : " + user.getNom(), Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        });
 
         // TODO : faire la liste des comptes
         btnAno.setOnClickListener(new View.OnClickListener() {
@@ -46,4 +86,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getUsers() {
+        class GetUsers extends AsyncTask<Void, Void, List<Users>> {
+
+            @Override
+            protected List<Users> doInBackground(Void... voids){
+                List<Users> usersList = maBase.getAppDatabase()
+                        .usersDao()
+                        .getALl();
+                return usersList;
+            }
+
+            @Override
+            protected void onPostExecute(List<Users> users) {
+                super.onPostExecute(users);
+
+                // Mettre à jour l'adapter avec la liste de taches
+                adaptater.clear();
+                adaptater.addAll(users);
+
+                // Now, notify the adapter of the change in source
+                adaptater.notifyDataSetChanged();
+            }
+        }
+
+        GetUsers gu = new GetUsers();
+        gu.execute();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getUsers();
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
+//
+//            // Mise à jour des taches
+//            getTasks();
+//        }
+//    }
 }
