@@ -1,36 +1,38 @@
 package com.example.miniprojet;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.miniprojet.dataBase.DataBaseClient;
+import com.example.miniprojet.dataBase.Users;
 
 public class CreationDeCompteActivity extends AppCompatActivity {
 // TODO : faire en sorte que quand le clavier monte les champs aussi
+
+    private DataBaseClient maBase;
+
     Button btnRetour, btnOk;
-    EditText login, password;
-    TextView textError;
+    EditText nom, prenom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation_de_compte);
 
+        maBase = DataBaseClient.getInstance(getApplicationContext());
+
         btnRetour = (Button) findViewById(R.id.Creation_button_retour);
         btnOk = (Button) findViewById(R.id.Creation_button_ok);
 
-        login = (EditText) findViewById(R.id.Creation_input_login);
-        password = (EditText) findViewById(R.id.Creation_input_password);
-
-        textError = (TextView) findViewById(R.id.Creation_text_error);
+        nom = (EditText) findViewById(R.id.Creation_input_nom);
+        prenom = (EditText) findViewById(R.id.Creation_input_prenom);
 
         btnRetour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,25 +43,65 @@ public class CreationDeCompteActivity extends AppCompatActivity {
             }
         });
 
-            btnOk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (infoOk()){
-                        // TODO : faire que ca enregistre dans la bd et ouvre la main page
-                        Intent intent = new Intent();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        finish();
-                    }
-                }
-            });
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveUser();
+            }
+        });
     }
 
-    public boolean infoOk(){
-        if (TextUtils.isEmpty(login.getText()) || TextUtils.isEmpty(password.getText())){
-            textError.setText("L'identifiant ou le mot de passe est incorect !");
-            return false;
-        } else {
-            return true;
+    private void saveUser() {
+        final String sNom = nom.getText().toString().trim();
+        final String sPrenom = prenom.getText().toString().trim();
+
+
+        if (sNom.isEmpty()) {
+            nom.setError("Le nom ne peut être vide !");
+            nom.requestFocus();
+            return;
         }
+
+        if (sPrenom.isEmpty()) {
+            prenom.setError("Le prenom ne peut etre vide !");
+            prenom.requestFocus();
+            return;
+        }
+
+        class SaveUser extends AsyncTask<Void, Void, Users>{
+            @Override
+            protected Users doInBackground(Void... voids) {
+
+                // creating a task
+                Users user = new Users();
+                user.setNom(sNom);
+                user.setPrenom(sPrenom);
+
+                // adding to database
+                long id = maBase.getAppDatabase()
+                        .usersDao()
+                        .insert(user);
+
+                // mettre à jour l'id de la tache
+                // Nécessaire si on souhaite avoir accès à l'id plus tard dans l'activité
+                user.setId(id);
+
+
+                return user;
+            }
+
+            @Override
+            protected void onPostExecute(Users user) {
+                super.onPostExecute(user);
+
+                // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
+                setResult(RESULT_OK);
+                finish();
+                Toast.makeText(getApplicationContext(), "Compte ajouté", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        SaveUser su = new SaveUser();
+        su.execute();
     }
 }

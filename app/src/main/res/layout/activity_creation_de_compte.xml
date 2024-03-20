@@ -30,25 +30,18 @@
             android:textSize="30dp" />
 
         <EditText
-            android:id="@+id/Creation_input_login"
+            android:id="@+id/Creation_input_nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/Creation_nom_hint" />
 
 
         <EditText
-            android:id="@+id/Creation_input_password"
+            android:id="@+id/Creation_input_prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:hint="@string/Creation_prenom_hint" />
-
-        <TextView
-            android:id="@+id/Creation_text_error"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@android:color/holo_red_dark"/>
 
         <Button
             android:id="@+id/Creation_button_ok"
