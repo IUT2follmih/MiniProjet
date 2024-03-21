@@ -15,7 +15,7 @@
         android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/template_user_nom"
+        android:id="@+id/Template_user_nom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Template_user_nom_text"

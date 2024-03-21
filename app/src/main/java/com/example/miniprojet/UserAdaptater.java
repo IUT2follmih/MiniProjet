@@ -31,11 +31,11 @@ public class UserAdaptater extends ArrayAdapter<Users>{
 
         // Récupération des objets graphiques dans le template
         TextView prenom = (TextView) rowView.findViewById(R.id.Template_user_prenom);
-        TextView nom = (TextView) rowView.findViewById(R.id.template_user_nom);
+        TextView nom = (TextView) rowView.findViewById(R.id.Template_user_nom);
 
         //
         prenom.setText(users.getPrenom());
-        nom.setText(users.getPrenom());
+        nom.setText(users.getNom());
 
         //
         return rowView;

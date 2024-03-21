@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DataBaseClient maBase;
     private UserAdaptater adaptater;
-
     Button btnAno;
     Button btnCrea;
     ListView userList;
@@ -62,14 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 // Récupération de la tâche cliquée à l'aide de l'adapter
                 Users user = adaptater.getItem(position);
 
-                // Message
-                Toast.makeText(MainActivity.this, "LongClick : " + user.getNom(), Toast.LENGTH_SHORT).show();
-
                 return false;
             }
         });
 
-        // TODO : faire la liste des comptes
         btnAno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         class GetUsers extends AsyncTask<Void, Void, List<Users>> {
 
             @Override
-            protected List<Users> doInBackground(Void... voids){
+            protected List<Users> doInBackground(Void... voids) {
                 List<Users> usersList = maBase.getAppDatabase()
                         .usersDao()
                         .getALl();
@@ -118,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         getUsers();
     }
 
@@ -131,5 +125,29 @@ public class MainActivity extends AppCompatActivity {
 //            // Mise à jour des taches
 //            getTasks();
 //        }
+//    }
+//
+//    private void supprUser() {
+//        final Users user = adaptater.getItem(1);
+//        class SupprUser extends AsyncTask<Void, Void, Users> {
+//            @Override
+//            protected Users doInBackground(Void... voids) {
+//                maBase.getAppDatabase()
+//                        .usersDao()
+//                        .delete(user);
+//
+//                return user;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Users user){
+//                super.onPostExecute(user);
+//
+//                Toast.makeText(getApplicationContext(), "Compte supprimé", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//
+//        SupprUser spu = new SupprUser();
+//        spu.execute();
 //    }
 }

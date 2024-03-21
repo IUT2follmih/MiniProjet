@@ -21,6 +21,7 @@ public class CreationDeCompteActivity extends AppCompatActivity {
 
     Button btnRetour, btnOk;
     EditText nom, prenom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +69,11 @@ public class CreationDeCompteActivity extends AppCompatActivity {
             return;
         }
 
-        class SaveUser extends AsyncTask<Void, Void, Users>{
+        class SaveUser extends AsyncTask<Void, Void, Users> {
             @Override
             protected Users doInBackground(Void... voids) {
 
-                // creating a task
+                // creating a user
                 Users user = new Users();
                 user.setNom(sNom);
                 user.setPrenom(sPrenom);
@@ -82,11 +83,8 @@ public class CreationDeCompteActivity extends AppCompatActivity {
                         .usersDao()
                         .insert(user);
 
-                // mettre à jour l'id de la tache
-                // Nécessaire si on souhaite avoir accès à l'id plus tard dans l'activité
+                // mettre à jour l'id du user
                 user.setId(id);
-
-
                 return user;
             }
 
