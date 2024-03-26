@@ -25,7 +25,8 @@ public class ListeExoActivity extends AppCompatActivity {
     }
 
     public void onExoTableDadd(View view) {
-        // TODO
+        Intent intent = new Intent(this, TableAdditionReponsesActivity.class);
+        startActivity(intent);
     }
 
     public void onExoQCM(View view) {

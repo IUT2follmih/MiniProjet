@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MiniProjet"
         tools:targetApi="31">
         <activity
+            android:name=".TableAdditionReponsesActivity"
+            android:exported="false" />
+        <activity
             android:name=".TableDeMultiplicationReponsesActivity"
             android:exported="false" />
         <activity

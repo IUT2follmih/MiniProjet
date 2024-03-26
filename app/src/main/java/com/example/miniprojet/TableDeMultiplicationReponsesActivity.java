@@ -19,13 +19,18 @@ import java.util.ArrayList;
 public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
     public static String TABLE_KEY = "1";
 
+    LinearLayout linear;
+    Button valider;
+    TextView calcul;
+    EditText resultat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_de_multiplication_reponses);
 
-        LinearLayout linear = findViewById(R.id.Table_mult_res_layout);
-        Button valider = findViewById(R.id.Table_mult_res_btn);
+        linear = findViewById(R.id.Table_mult_res_layout);
+        valider = findViewById(R.id.Table_mult_res_btn);
 
         ArrayList<EditText> resList = new ArrayList<>();
 
@@ -39,10 +44,10 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
         for (Multiplication mult : tableMult.getMultiplications()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
 
-            TextView calcul = (TextView) linearTMP.findViewById(R.id.template_calcul);
+            calcul = (TextView) linearTMP.findViewById(R.id.template_calcul);
             calcul.setText(mult.getA() + "x" + mult.getB() + "=");
 
-            EditText resultat = (EditText) linearTMP.findViewById(R.id.template_resultat);
+            resultat = (EditText) linearTMP.findViewById(R.id.template_resultat);
             //resultat.setText(Integer.toString(mult.getA() * mult.getB()));
             resList.add(resultat);
             linear.addView(linearTMP);
