@@ -21,4 +21,7 @@
     <string name="Template_user_prenom_text">PRENOM</string>
     <string name="Template_user_nom_text">NOM</string>
     <string name="Main_text_list_vide">Aucun compte enregistré veuillez en crée un !</string>
+    <string name="tableText">Choisis la table de multiplication</string>
+    <string name="buttonTableValider">VALIDER</string>
+    <string name="Table_mult_res_btn_text">VALIDER</string>
 </resources>

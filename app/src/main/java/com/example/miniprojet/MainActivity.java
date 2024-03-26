@@ -50,14 +50,16 @@ public class MainActivity extends AppCompatActivity {
         userList.setAdapter(adaptater);
 
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Users user = adaptater.getItem(position);
 
-                Toast.makeText(MainActivity.this, "Click : " + user.getPrenom(), Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(MainActivity.this, ListeExoActivity.class);
+                startActivity(intent);
             }
         });
+
 
         userList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -75,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
                     supprUser(position);
                     getUsers();
                 });
-                builder.setNegativeButton("Annumer", (dialog, which) -> {
+                builder.setNegativeButton("Annuler", (dialog, which) -> {
                     dialog.dismiss();
                 });
 
                 builder.show();
-                return false;
+                return true;
             }
         });
 
@@ -158,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 maBase.getAppDatabase()
                         .usersDao()
                         .delete(user);
-
                 return user;
             }
 
