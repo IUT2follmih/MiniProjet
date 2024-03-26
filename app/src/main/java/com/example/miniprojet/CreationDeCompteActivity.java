@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.miniprojet.dataBase.DataBaseClient;
 import com.example.miniprojet.dataBase.Users;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class CreationDeCompteActivity extends AppCompatActivity {
 // TODO : faire en sorte que quand le clavier monte les champs aussi
@@ -24,7 +25,7 @@ public class CreationDeCompteActivity extends AppCompatActivity {
     private DataBaseClient maBase;
 
     Button btnRetour, btnOk;
-    EditText nom, prenom;
+    TextInputLayout nom, prenom;
 
     RelativeLayout layout;
 
@@ -38,8 +39,8 @@ public class CreationDeCompteActivity extends AppCompatActivity {
         btnRetour = (Button) findViewById(R.id.Creation_button_retour);
         btnOk = (Button) findViewById(R.id.Creation_button_ok);
 
-        nom = (EditText) findViewById(R.id.Creation_input_nom);
-        prenom = (EditText) findViewById(R.id.Creation_input_prenom);
+        nom = (TextInputLayout) findViewById(R.id.Creation_input_nom);
+        prenom = (TextInputLayout) findViewById(R.id.Creation_input_prenom);
         layout = (RelativeLayout) findViewById(R.id.Creation_layout);
 
         btnRetour.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +81,8 @@ public class CreationDeCompteActivity extends AppCompatActivity {
     }
 
     private void saveUser() {
-        final String sNom = nom.getText().toString().trim();
-        final String sPrenom = prenom.getText().toString().trim();
+        final String sNom = nom.getEditText().getText().toString().trim();
+        final String sPrenom = prenom.getEditText().getText().toString().trim();
 
 
         if (sNom.isEmpty()) {

@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
                 // Récupération de la tâche cliquée à l'aide de l'adapter
                 Users user = adaptater.getItem(position);
+
+                //
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Suppression");
                 builder.setIcon(R.drawable.baseline_info_24);
