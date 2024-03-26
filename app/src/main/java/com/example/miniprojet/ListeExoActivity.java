@@ -20,7 +20,8 @@ public class ListeExoActivity extends AppCompatActivity {
     }
 
     public void onExoTableDeMult(View view) {
-        // TODO
+        Intent intent = new Intent(this, TableDeMultiplicationActivity.class);
+        startActivity(intent);
     }
 
     public void onExoTableDadd(View view) {

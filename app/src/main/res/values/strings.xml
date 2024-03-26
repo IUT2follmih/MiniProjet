@@ -5,8 +5,8 @@
     <string name="Main_main_title">Choisir son compte</string>
     <string name="Creation_title">Création d\'un compte</string>
     <string name="Creation_nom_hint">Nom</string>
-    <string name="Creation_prenom_hint">Prenom</string>
-    <string name="Creation_button_text">Crée mon compte</string>
+    <string name="Creation_prenom_hint">Prénom</string>
+    <string name="Creation_button_text">Créer mon compte</string>
     <string name="Creation_button_text_retour">Retour</string>
     <string name="List_text">Choisir l\'exercice</string>
     <string name="List_btn_TableDeMult">Table de multiplication</string>
@@ -24,4 +24,5 @@
     <string name="tableText">Choisis la table de multiplication</string>
     <string name="buttonTableValider">VALIDER</string>
     <string name="Table_mult_res_btn_text">VALIDER</string>
+    <string name="Result_btn_recommencer">Recommencer l\'exercice</string>
 </resources>

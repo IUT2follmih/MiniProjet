@@ -58,10 +58,13 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
                         tableMult.getMultiplications().get(i).setRES(Integer.parseInt(resList.get(i).getText().toString()));
                     }
                 }
-                Integer res = tableMult.getNbErreurs();
+                Integer nbErr = tableMult.getNbErreurs();
                 Toast.makeText(TableDeMultiplicationReponsesActivity.this, "Bon!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TableDeMultiplicationReponsesActivity.this, Exercice5ActivityResult.class);
-                intent.putExtra(Exercice5ActivityResult.NB_ERROR, res);
+                Intent intent = new Intent(TableDeMultiplicationReponsesActivity.this, ResultatActivity.class);
+                intent.putExtra(ResultatActivity.NOM_EXO, "Table de multiplication");
+                intent.putExtra(ResultatActivity.NB_ERROR, nbErr);
+                intent.putExtra(ResultatActivity.TABLE_KEY, key);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });

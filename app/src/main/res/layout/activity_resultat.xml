@@ -19,20 +19,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Result_text_title"
-            android:textSize="40dp" />
+            android:textSize="40sp"
+            android:layout_marginBottom="10dp"
+            />
 
         <TextView
             android:id="@+id/Result_text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Result_text_name"
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            />
 
         <TextView
             android:id="@+id/Result_text_nbOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Result_text_nbOk"/>
+            android:text="@string/Result_text_nbOk"
+            android:layout_marginBottom="10dp"
+            />
 
         <TextView
             android:id="@+id/Result_text_nbError"
@@ -51,15 +57,31 @@
         android:orientation="vertical">
 
         <Button
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+            android:id="@+id/Result_btn_recommencer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Result_btn_recommencer"
+            app:icon="@drawable/baseline_autorenew_24"
+            android:visibility="gone"
+            />
+
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:id="@+id/Result_btn_retour_exo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Result_btn_retour_exo" />
+            android:text="@string/Result_btn_retour_exo"
+            app:icon="@drawable/baseline_edit_document_24"
+            />
 
         <Button
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:id="@+id/Result_btn_retour_comptes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Result_btn_retour_comptes" />
+            android:text="@string/Result_btn_retour_comptes"
+            app:icon="@drawable/baseline_person_24"
+            />
     </LinearLayout>
 </RelativeLayout>

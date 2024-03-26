@@ -32,5 +32,4 @@ public class TableDeMultiplication {
         }
         return c;
     }
-
 }
