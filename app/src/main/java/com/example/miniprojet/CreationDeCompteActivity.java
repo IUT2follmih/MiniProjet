@@ -1,11 +1,15 @@
 package com.example.miniprojet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,8 @@ public class CreationDeCompteActivity extends AppCompatActivity {
     Button btnRetour, btnOk;
     EditText nom, prenom;
 
+    RelativeLayout layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class CreationDeCompteActivity extends AppCompatActivity {
 
         nom = (EditText) findViewById(R.id.Creation_input_nom);
         prenom = (EditText) findViewById(R.id.Creation_input_prenom);
+        layout = (RelativeLayout) findViewById(R.id.Creation_layout);
 
         btnRetour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +55,26 @@ public class CreationDeCompteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveUser();
+            }
+        });
+
+        // If keybord up, and we touch the screen, the keybord will go down
+        nom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    nom.setHint("");
+                } else {
+                    nom.setHint("Nom");
+                }
+            }
+        });
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
     }

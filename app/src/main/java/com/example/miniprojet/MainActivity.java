@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnAno;
     Button btnCrea;
     ListView userList;
+    TextView txtListVide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnAno = (Button) findViewById(R.id.Main_btn_Ano);
         btnCrea = (Button) findViewById(R.id.Main_btn_crea);
+        txtListVide = (TextView) findViewById(R.id.Main_text_list_vide);
 
         userList = (ListView) findViewById(R.id.Main_list_users);
 
@@ -60,7 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
                 // Récupération de la tâche cliquée à l'aide de l'adapter
                 Users user = adaptater.getItem(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Suppression");
+                builder.setIcon(R.drawable.baseline_info_24);
+                builder.setMessage("Voulez-vous vraiment supprimer " + user.getNom() + " ?");
+                builder.setPositiveButton("Supprimer", (dialog, which) -> {
+                    supprUser(position);
+                    getUsers();
+                });
+                builder.setNegativeButton("Annumer", (dialog, which) -> {
+                    dialog.dismiss();
+                });
 
+                builder.show();
                 return false;
             }
         });
@@ -113,10 +130,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getUsers();
+        if (userList != null) {
+            getUsers();
+        } else {
+            txtListVide.setVisibility(View.VISIBLE);
+        }
     }
 
-//    @Override
+    //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //
@@ -127,27 +148,26 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 //
-//    private void supprUser() {
-//        final Users user = adaptater.getItem(1);
-//        class SupprUser extends AsyncTask<Void, Void, Users> {
-//            @Override
-//            protected Users doInBackground(Void... voids) {
-//                maBase.getAppDatabase()
-//                        .usersDao()
-//                        .delete(user);
-//
-//                return user;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Users user){
-//                super.onPostExecute(user);
-//
-//                Toast.makeText(getApplicationContext(), "Compte supprimé", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//
-//        SupprUser spu = new SupprUser();
-//        spu.execute();
-//    }
+    private void supprUser(int position) {
+        final Users user = adaptater.getItem(position);
+        class SupprUser extends AsyncTask<Void, Void, Users> {
+            @Override
+            protected Users doInBackground(Void... voids) {
+                maBase.getAppDatabase()
+                        .usersDao()
+                        .delete(user);
+
+                return user;
+            }
+
+            @Override
+            protected void onPostExecute(Users user) {
+                super.onPostExecute(user);
+                Toast.makeText(getApplicationContext(), "Compte " + user.getNom() + " supprimé", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        SupprUser spu = new SupprUser();
+        spu.execute();
+    }
 }

@@ -25,6 +25,15 @@
             android:textSize="30dp"
             android:layout_marginBottom="20dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Main_text_list_vide"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_dark"
+            android:id="@+id/Main_text_list_vide"
+            />
+
         <ListView
             android:id="@+id/Main_list_users"
             android:layout_width="match_parent"

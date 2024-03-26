@@ -20,4 +20,5 @@
     <string name="Result_text_nbError">Nombre de fautes</string>
     <string name="Template_user_prenom_text">PRENOM</string>
     <string name="Template_user_nom_text">NOM</string>
+    <string name="Main_text_list_vide">Aucun compte enregistré veuillez en crée un !</string>
 </resources>
