@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         adaptater = new UserAdaptater(this, new ArrayList<Users>());
         userList.setAdapter(adaptater);
 
+        userList.setEmptyView(txtListVide);
+
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -134,11 +136,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (userList != null) {
-            getUsers();
-        } else {
-            txtListVide.setVisibility(View.VISIBLE);
-        }
+        getUsers();
     }
 
     //    @Override

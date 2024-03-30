@@ -1,11 +1,15 @@
 package com.example.miniprojet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +27,7 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
     Button valider;
     TextView calcul;
     EditText resultat;
+    RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
         ArrayList<EditText> resList = new ArrayList<>();
 
         TableAddition tableAdd = new TableAddition();
+
+        layout = (RelativeLayout) findViewById(R.id.Table_add_layout);
 
         for (Addition add : tableAdd.getAdditions()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
@@ -63,6 +70,14 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
             intent.putExtra(ResultatActivity.NB_ERROR, nbErr);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+        });
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
         });
     }
 }

@@ -3,8 +3,10 @@ package com.example.miniprojet.dataBase;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "users")
-public class Users {
+public class Users implements Serializable {
     private String Nom;
     private String Prenom;
 

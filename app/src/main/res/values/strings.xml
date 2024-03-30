@@ -7,7 +7,7 @@
     <string name="Creation_nom_hint">Nom</string>
     <string name="Creation_prenom_hint">Prénom</string>
     <string name="Creation_button_text">Créer mon compte</string>
-    <string name="Creation_button_text_retour">Retour</string>
+    <string name="Creation_button_text_retour">Annuler</string>
     <string name="List_text">Choisir l\'exercice</string>
     <string name="List_btn_TableDeMult">Table de multiplication</string>
     <string name="List_btn_TableDadd">Table d\'addition</string>

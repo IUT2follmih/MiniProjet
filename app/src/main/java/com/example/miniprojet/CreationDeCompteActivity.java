@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +21,13 @@ import com.example.miniprojet.dataBase.Users;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreationDeCompteActivity extends AppCompatActivity {
-// TODO : faire en sorte que quand le clavier monte les champs aussi
 
     private DataBaseClient maBase;
 
     Button btnRetour, btnOk;
     TextInputLayout nom, prenom;
 
-    RelativeLayout layout;
+    ScrollView layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class CreationDeCompteActivity extends AppCompatActivity {
 
         nom = (TextInputLayout) findViewById(R.id.Creation_input_nom);
         prenom = (TextInputLayout) findViewById(R.id.Creation_input_prenom);
-        layout = (RelativeLayout) findViewById(R.id.Creation_layout);
+        layout = (ScrollView) findViewById(R.id.Creation_layout);
 
         btnRetour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +59,6 @@ public class CreationDeCompteActivity extends AppCompatActivity {
             }
         });
 
-        // If keybord up, and we touch the screen, the keybord will go down
-        nom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    nom.setHint("");
-                } else {
-                    nom.setHint("Nom");
-                }
-            }
-        });
-
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +66,8 @@ public class CreationDeCompteActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
+
+        nom.getEditText().requestFocus();
     }
 
     private void saveUser() {

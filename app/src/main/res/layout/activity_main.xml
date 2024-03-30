@@ -10,66 +10,53 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="500dp"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_height="550dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        >
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Main_main_title"
-            android:textSize="30dp"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="30dp" />
 
-        <TextView
+        <Button
+            android:id="@+id/Main_btn_Ano"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Main_text_list_vide"
-            android:visibility="gone"
-            android:textColor="@android:color/holo_red_dark"
+            android:text="@string/Main_btn_Ano" />
+
+        <TextView
             android:id="@+id/Main_text_list_vide"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/Main_text_list_vide"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone" />
 
         <ListView
             android:id="@+id/Main_list_users"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            />
+            android:orientation="vertical" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/Main_btn_crea"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:text="@string/Main_btn_crea"
+        app:icon="@drawable/baseline_add_24"
         android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginBottom="50dp">
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Main_btn_Ano"
-            android:id="@+id/Main_btn_Ano"
-            app:icon="@drawable/baseline_person_24"
-            />
-
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Main_btn_crea"
-            android:id="@+id/Main_btn_crea"
-            app:icon="@drawable/baseline_add_24"
-            />
-    </LinearLayout>
-
+        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>

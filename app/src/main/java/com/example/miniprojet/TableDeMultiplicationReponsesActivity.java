@@ -2,12 +2,15 @@ package com.example.miniprojet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
     Button valider;
     TextView calcul;
     EditText resultat;
+    RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
         valider = findViewById(R.id.Table_mult_res_btn);
 
         ArrayList<EditText> resList = new ArrayList<>();
+
+        layout = (RelativeLayout) findViewById(R.id.Table_mult_layout);
 
         int key = getIntent().getIntExtra(TABLE_KEY, 1);
         //Toast.makeText(TableMultiplicationActivity.this,TABLE_KEY, Toast.LENGTH_SHORT).show();
@@ -71,6 +77,14 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
                 intent.putExtra(ResultatActivity.TABLE_KEY, key);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+            }
+        });
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
 
