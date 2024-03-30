@@ -1,28 +1,29 @@
 <resources>
     <string name="app_name">MiniProjet</string>
     <string name="Main_btn_Ano">Continuer en anonyme</string>
-    <string name="Main_btn_crea">Crée un compte</string>
+    <string name="Main_btn_crea">Créer un compte</string>
     <string name="Main_main_title">Choisir son compte</string>
     <string name="Creation_title">Création d\'un compte</string>
     <string name="Creation_nom_hint">Nom</string>
     <string name="Creation_prenom_hint">Prénom</string>
     <string name="Creation_button_text">Créer mon compte</string>
-    <string name="Creation_button_text_retour">Annuler</string>
     <string name="List_text">Choisir l\'exercice</string>
-    <string name="List_btn_TableDeMult">Table de multiplication</string>
-    <string name="List_btn_TableDadd">Table d\'addition</string>
+    <string name="List_btn_TableDeMult">Tables de multiplication</string>
+    <string name="List_btn_TableDadd">Tables d\'addition</string>
     <string name="List_btn_QCM">QCM de connaissances</string>
     <string name="Result_btn_retour_exo">Retour aux exercices</string>
     <string name="Result_btn_retour_comptes">Retour aux utilisateurs</string>
     <string name="Result_text_title">Fail ?</string>
     <string name="Result_text_name">Nom de L\'EXO</string>
-    <string name="Result_text_nbOk">Nombre de réponse juste</string>
+    <string name="Result_text_nbOk">Nombre de réponses juste</string>
     <string name="Result_text_nbError">Nombre de fautes</string>
     <string name="Template_user_prenom_text">PRENOM</string>
     <string name="Template_user_nom_text">NOM</string>
-    <string name="Main_text_list_vide">Aucun compte enregistré veuillez en crée un !</string>
+    <string name="Main_text_list_vide">Aucun compte enregistré veuillez en créer un !</string>
     <string name="tableText">Choisis la table de multiplication</string>
     <string name="buttonTableValider">VALIDER</string>
     <string name="Table_mult_res_btn_text">VALIDER</string>
     <string name="Result_btn_recommencer">Recommencer l\'exercice</string>
+    <string name="List_text_user">Bonjour ?????</string>
+    <string name="Creation_button_text_retour">Annuler</string>
 </resources>

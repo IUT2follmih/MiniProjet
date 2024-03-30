@@ -3,6 +3,8 @@ package com.example.miniprojet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,32 +12,64 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.miniprojet.dataBase.Users;
+
 public class ListeExoActivity extends AppCompatActivity {
+
+    Button multi, add, qcm, retour;
+    TextView userName;
+    public static boolean ANONYME = false;
+    public static Users USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_exo);
 
-    }
+        multi = (Button) findViewById(R.id.List_btn_multiplication);
+        add = (Button) findViewById(R.id.List_btn_addition);
+        qcm = (Button) findViewById(R.id.List_btn_qcm);
+        retour = (Button) findViewById(R.id.List_btn_retour);
 
-    public void onExoTableDeMult(View view) {
-        Intent intent = new Intent(this, TableDeMultiplicationActivity.class);
-        startActivity(intent);
-    }
+        userName = (TextView) findViewById(R.id.Liste_text_user);
+        Users user;
 
-    public void onExoTableDadd(View view) {
-        Intent intent = new Intent(this, TableAdditionReponsesActivity.class);
-        startActivity(intent);
-    }
+        boolean isAno = getIntent().getBooleanExtra(String.valueOf(ANONYME), false);
+        if (isAno) {
+            userName.setText("Anonyme");
+        } else {
+            user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
+            userName.setText("Bonjour " + user.getNom() + " " + user.getPrenom() + " !");
+        }
 
-    public void onExoQCM(View view) {
-        // TODO
-    }
+        multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListeExoActivity.this, TableDeMultiplicationActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    public void btnRetour(View view) {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        finish();
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListeExoActivity.this, TableAdditionReponsesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        qcm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
+
+        retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

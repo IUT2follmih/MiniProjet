@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="@string/Result_text_name"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/Result_text_note"

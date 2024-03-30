@@ -32,8 +32,6 @@ public class DataBaseClient {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-
-            db.execSQL("INSERT INTO users (nom, prenom) VALUES(\"Paul\", \"Atreides\");");
         }
     };
 }

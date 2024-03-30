@@ -46,13 +46,12 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
 
         String nomExo = getIntent().getStringExtra(NOM_EXO);
         Integer errors = getIntent().getIntExtra(NB_ERROR, 0);
-        Integer juste = 10 - errors;
 
-        name.setText("Reslutat de l'exercice : " + nomExo);
+        name.setText("Resultat de l'exercice : " + nomExo);
         note.setText((10 - errors) + "/10");
         if (errors > 3) {
             note.setTextColor(Color.RED);
-            result.setText("Vous n'avez pas réussi l'exercice");
+            result.setText("Vous n'avez pas réussi l'exercice !");
         } else {
             note.setTextColor(Color.GREEN);
             result.setText("Vous avez réussi l'exercice !!");

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnCrea;
     ListView userList;
     TextView txtListVide;
+    boolean isVue = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Users user = adaptater.getItem(position);
-
-                Intent intent = new Intent(MainActivity.this, ListeExoActivity.class);
-                startActivity(intent);
+                giveUser(user, false);
             }
         });
 
@@ -91,8 +90,29 @@ public class MainActivity extends AppCompatActivity {
         btnAno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListeExoActivity.class);
-                startActivity(intent);
+                if (!isVue) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Continuer en anonyme");
+                    builder.setIcon(R.drawable.baseline_warning_24);
+                    builder.setMessage("Voulez-vous vraiment continuer en anonyme ? " +
+                            "\nLes resultats ne seront pas sauvegardés !");
+                    builder.setPositiveButton("Continuer", (dialog, which) -> {
+                        giveUser(null, true);
+                        isVue = true;
+                    });
+                    builder.setNeutralButton("Créer un compte", (dialog, which) -> {
+                        Intent intent = new Intent(MainActivity.this, CreationDeCompteActivity.class);
+                        startActivity(intent);
+                    });
+                    builder.setNegativeButton("Annuler", (dialog, which) -> {
+                        dialog.dismiss();
+                    });
+                    builder.setCancelable(false);
+                    builder.show();
+                } else {
+                    giveUser(null, true);
+                }
+
             }
         });
 
@@ -103,6 +123,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void giveUser(Users user, boolean anonyme) {
+        Intent intent = new Intent(MainActivity.this, ListeExoActivity.class);
+        intent.putExtra(String.valueOf(ListeExoActivity.ANONYME), anonyme);
+        if (!anonyme) {
+            intent.putExtra(String.valueOf(ListeExoActivity.USER), user);
+        }
+        startActivity(intent);
     }
 
     private void getUsers() {
