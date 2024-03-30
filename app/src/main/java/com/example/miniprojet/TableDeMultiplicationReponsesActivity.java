@@ -44,7 +44,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
         //Toast.makeText(TableMultiplicationActivity.this,TABLE_KEY, Toast.LENGTH_SHORT).show();
         TableDeMultiplication tableMult = new TableDeMultiplication(key);
 
-        //linear.removeAllViews();
+        linear.removeAllViews();
 
 
         for (Multiplication mult : tableMult.getMultiplications()) {

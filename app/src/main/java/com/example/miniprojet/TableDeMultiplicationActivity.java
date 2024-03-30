@@ -38,6 +38,7 @@ public class TableDeMultiplicationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TableDeMultiplicationActivity.this, TableDeMultiplicationReponsesActivity.class);
+                intent.putExtra(TableDeMultiplicationReponsesActivity.TABLE_KEY, nbPicker.getValue());
                 startActivity(intent);
             }
         });
