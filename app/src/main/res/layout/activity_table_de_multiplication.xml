@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tableText"
-            android:textSize="25dp"/>
+            android:textSize="23dp"/>
 
         <NumberPicker
             android:id="@+id/Table_mult_nbPicker"
