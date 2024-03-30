@@ -28,9 +28,9 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
     public static String NB_ERROR = "0";
     public static String TABLE_KEY = "1";
     Button btnReExo, btnReUser, btnRecomecer;
-    TextView title, name, nbOk, nbError;
+    TextView name, note, result;
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,37 +40,51 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
         btnReUser = (Button) findViewById(R.id.Result_btn_retour_comptes);
         btnRecomecer = (Button) findViewById(R.id.Result_btn_recommencer);
 
-        title = (TextView) findViewById(R.id.Result_text_title);
         name = (TextView) findViewById(R.id.Result_text_name);
-        nbOk = (TextView) findViewById(R.id.Result_text_nbOk);
-        nbError = (TextView) findViewById(R.id.Result_text_nbError);
+        note = (TextView) findViewById(R.id.Result_text_note);
+        result = (TextView) findViewById(R.id.Result_text_result);
 
         String nomExo = getIntent().getStringExtra(NOM_EXO);
         Integer errors = getIntent().getIntExtra(NB_ERROR, 0);
         Integer juste = 10 - errors;
 
-        if (errors > 0) {
-            title.setText("ERREURS !");
-            title.setTextColor(Color.RED);
-            btnRecomecer.setVisibility(View.VISIBLE);
+        name.setText("Reslutat de l'exercice : " + nomExo);
+        note.setText((10 - errors) + "/10");
+        if (errors > 3) {
+            note.setTextColor(Color.RED);
+            result.setText("Vous n'avez pas réussi l'exercice");
         } else {
-            title.setText("FELICITATION !");
-            title.setTextColor(Color.GREEN);
+            note.setTextColor(Color.GREEN);
+            result.setText("Vous avez réussi l'exercice !!");
         }
-
-        name.setText(nomExo);
-        nbOk.setText("Nombre de bonnes réponses : " + juste);
-        nbError.setText("Nombre d'erreurs : " + errors);
-
         btnRecomecer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (nomExo.equals("Table de multiplication")) {
+//                    if (errors > 3) {
+//                        btnRecomecer.setText("Corriger mes fautes");
+//                        // TODO : faire la correction de fautes
+//                    } else {
+//                        Intent intent = new Intent(ResultatActivity.this, TableDeMultiplicationReponsesActivity.class);
+//                        intent.putExtra(TableDeMultiplicationReponsesActivity.TABLE_KEY, getIntent().getIntExtra(TABLE_KEY, 1));
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//                    }
+
                     Intent intent = new Intent(ResultatActivity.this, TableDeMultiplicationReponsesActivity.class);
                     intent.putExtra(TableDeMultiplicationReponsesActivity.TABLE_KEY, getIntent().getIntExtra(TABLE_KEY, 1));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } else if (nomExo.equals("Table d'addition")) {
+//                    if (errors > 3) {
+//                        btnRecomecer.setText("Corriger mes fautes");
+//                        // TODO : faire la correction de fautes
+//                    } else {
+//                        Intent intent = new Intent(ResultatActivity.this, TableAdditionReponsesActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//                    }
+
                     Intent intent = new Intent(ResultatActivity.this, TableAdditionReponsesActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -81,9 +95,9 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
         btnReExo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(ResultatActivity.this, ListeExoActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                Intent intent = new Intent(ResultatActivity.this, ListeExoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

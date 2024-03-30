@@ -15,36 +15,29 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/Result_text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Result_text_title"
-            android:textSize="40sp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <TextView
             android:id="@+id/Result_text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="@string/Result_text_name"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"
-            />
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/Result_text_nbOk"
+            android:id="@+id/Result_text_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Result_text_nbOk"
             android:layout_marginBottom="10dp"
-            />
+            android:text="@string/Result_text_title"
+            android:textSize="40sp" />
+
 
         <TextView
-            android:id="@+id/Result_text_nbError"
+            android:id="@+id/Result_text_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Result_text_nbError"/>
+            android:layout_marginBottom="10dp"
+            android:text="@string/Result_text_nbOk" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -57,29 +50,27 @@
         android:orientation="vertical">
 
         <Button
+            style="@style/Widget.Material3.Button.TextButton"
             android:id="@+id/Result_btn_recommencer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Result_btn_recommencer"
-            android:visibility="gone"
             />
 
         <Button
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:id="@+id/Result_btn_retour_exo"
+            style="@style/Widget.Material3.Button.TonalButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Result_btn_retour_exo"
-            app:icon="@drawable/baseline_edit_document_24"
-            />
+            app:icon="@drawable/baseline_edit_document_24" />
 
         <Button
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:id="@+id/Result_btn_retour_comptes"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Result_btn_retour_comptes"
-            app:icon="@drawable/baseline_person_24"
-            />
+            app:icon="@drawable/baseline_person_24" />
     </LinearLayout>
 </RelativeLayout>
