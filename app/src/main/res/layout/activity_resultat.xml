@@ -57,12 +57,10 @@
         android:orientation="vertical">
 
         <Button
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:id="@+id/Result_btn_recommencer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Result_btn_recommencer"
-            app:icon="@drawable/baseline_autorenew_24"
             android:visibility="gone"
             />
 
