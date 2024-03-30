@@ -1,5 +1,6 @@
 package com.example.miniprojet;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,7 +15,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class ResultatActivity extends AppCompatActivity {
+import com.example.miniprojet.tableAddition.Addition;
+import com.example.miniprojet.tableAddition.TableAddition;
+
+import java.io.Serializable;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+
+public class ResultatActivity extends AppCompatActivity implements Serializable {
 
     public static String NOM_EXO = "NOMEXO";
     public static String NB_ERROR = "0";
@@ -57,10 +65,16 @@ public class ResultatActivity extends AppCompatActivity {
         btnRecomecer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResultatActivity.this, TableDeMultiplicationReponsesActivity.class);
-                intent.putExtra(TableDeMultiplicationReponsesActivity.TABLE_KEY, getIntent().getIntExtra(TABLE_KEY, 1));
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                if (nomExo.equals("Table de multiplication")) {
+                    Intent intent = new Intent(ResultatActivity.this, TableDeMultiplicationReponsesActivity.class);
+                    intent.putExtra(TableDeMultiplicationReponsesActivity.TABLE_KEY, getIntent().getIntExtra(TABLE_KEY, 1));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else if (nomExo.equals("Table d'addition")) {
+                    Intent intent = new Intent(ResultatActivity.this, TableAdditionReponsesActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
             }
         });
 
