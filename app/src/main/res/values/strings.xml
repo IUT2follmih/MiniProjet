@@ -26,4 +26,5 @@
     <string name="Result_btn_recommencer">Recommencer l\'exercice</string>
     <string name="List_text_user">Bonjour ?????</string>
     <string name="Creation_button_text_retour">Annuler</string>
+    <string name="Table_add_retour_btn_text">Retour</string>
 </resources>

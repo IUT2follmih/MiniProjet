@@ -8,13 +8,13 @@ public class TableDeMultiplication {
 
     public ArrayList<Multiplication> multiplications = new ArrayList<>();
 
-    public TableDeMultiplication(int table){
+    public TableDeMultiplication(int table) {
         TABLE = table;
         initMultiplication();
     }
 
-    private void initMultiplication(){
-        for (int i = 1; i<10; i++ ){
+    private void initMultiplication() {
+        for (int i = 1; i <= 10; i++) {
             multiplications.add(new Multiplication(i, TABLE));
         }
     }
@@ -23,10 +23,10 @@ public class TableDeMultiplication {
         return multiplications;
     }
 
-    public int getNbErreurs(){
+    public int getNbErreurs() {
         int c = 0;
-        for (Multiplication mult:multiplications) {
-            if(!mult.isOk()){
+        for (Multiplication mult : multiplications) {
+            if (!mult.isOk()) {
                 c++;
             }
         }

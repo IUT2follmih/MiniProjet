@@ -9,18 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.example.miniprojet.tableAddition.Addition;
-import com.example.miniprojet.tableAddition.TableAddition;
 
 import java.io.Serializable;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 
 public class ResultatActivity extends AppCompatActivity implements Serializable {
 

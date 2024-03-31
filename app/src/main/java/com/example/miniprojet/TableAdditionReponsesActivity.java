@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,10 +25,10 @@ import java.util.concurrent.atomic.AtomicReference;
 public class TableAdditionReponsesActivity extends AppCompatActivity implements Serializable {
 
     LinearLayout linear;
-    Button valider;
+    Button valider, retour;
     TextView calcul;
     EditText resultat;
-    RelativeLayout layout;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +37,13 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
 
         linear = findViewById(R.id.Table_add_res_layout);
         valider = findViewById(R.id.Table_add_res_btn);
+        retour = findViewById(R.id.Table_add_retour_btn);
 
         ArrayList<EditText> resList = new ArrayList<>();
 
         TableAddition tableAdd = new TableAddition();
 
-        layout = (RelativeLayout) findViewById(R.id.Table_add_layout);
+        layout = (LinearLayout) findViewById(R.id.Table_add_layout);
 
         for (Addition add : tableAdd.getAdditions()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
@@ -65,11 +67,16 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
                 }
             }
             Integer nbErr = tableAdd.getNbErreurs();
+            Toast.makeText(TableAdditionReponsesActivity.this, "Vous avez " + tableAdd.getNbErreurs() + " erreurs", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(TableAdditionReponsesActivity.this, ResultatActivity.class);
             intent.putExtra(ResultatActivity.NOM_EXO, "Table d'addition");
             intent.putExtra(ResultatActivity.NB_ERROR, nbErr);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+        });
+
+        retour.setOnClickListener(view -> {
+            finish();
         });
 
         layout.setOnClickListener(new View.OnClickListener() {

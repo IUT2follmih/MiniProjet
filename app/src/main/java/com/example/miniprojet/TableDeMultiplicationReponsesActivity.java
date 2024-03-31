@@ -26,7 +26,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
     Button valider;
     TextView calcul;
     EditText resultat;
-    RelativeLayout layout;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,9 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
 
         ArrayList<EditText> resList = new ArrayList<>();
 
-        layout = (RelativeLayout) findViewById(R.id.Table_mult_layout);
+        layout = (LinearLayout) findViewById(R.id.Table_mult_layout);
 
         int key = getIntent().getIntExtra(TABLE_KEY, 1);
-        //Toast.makeText(TableMultiplicationActivity.this,TABLE_KEY, Toast.LENGTH_SHORT).show();
         TableDeMultiplication tableMult = new TableDeMultiplication(key);
 
         linear.removeAllViews();
@@ -54,7 +53,6 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
             calcul.setText(mult.getA() + "x" + mult.getB() + "=");
 
             resultat = (EditText) linearTMP.findViewById(R.id.template_resultat);
-            //resultat.setText(Integer.toString(mult.getA() * mult.getB()));
             resList.add(resultat);
             linear.addView(linearTMP);
         }
