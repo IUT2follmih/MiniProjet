@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.miniprojet.dataBase.DataBaseClient;
 import com.example.miniprojet.dataBase.Users;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,20 +70,18 @@ public class MainActivity extends AppCompatActivity {
                 // Récupération de la tâche cliquée à l'aide de l'adapter
                 Users user = adaptater.getItem(position);
 
-                //
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Suppression");
-                builder.setIcon(R.drawable.baseline_info_24);
-                builder.setMessage("Voulez-vous vraiment supprimer " + user.getNom() + " ?");
-                builder.setPositiveButton("Supprimer", (dialog, which) -> {
-                    supprUser(position);
-                    getUsers();
-                });
-                builder.setNegativeButton("Annuler", (dialog, which) -> {
-                    dialog.dismiss();
-                });
-
-                builder.show();
+                new MaterialAlertDialogBuilder(MainActivity.this)
+                        .setTitle("Suppression")
+                        .setIcon(R.drawable.baseline_info_24)
+                        .setMessage("Voulez-vous vraiment supprimer " + user.getNom() + " ?")
+                        .setPositiveButton("Supprimer", (dialog, which) -> {
+                            supprUser(position);
+                            getUsers();
+                        })
+                        .setNegativeButton("Annuler", (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                        .show();
                 return true;
             }
         });
@@ -91,24 +90,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isVue) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("Continuer en anonyme");
-                    builder.setIcon(R.drawable.baseline_warning_24);
-                    builder.setMessage("Voulez-vous vraiment continuer en anonyme ? " +
-                            "\nLes resultats ne seront pas sauvegardés !");
-                    builder.setPositiveButton("Continuer", (dialog, which) -> {
-                        giveUser(null, true);
-                        isVue = true;
-                    });
-                    builder.setNeutralButton("Créer un compte", (dialog, which) -> {
-                        Intent intent = new Intent(MainActivity.this, CreationDeCompteActivity.class);
-                        startActivity(intent);
-                    });
-                    builder.setNegativeButton("Annuler", (dialog, which) -> {
-                        dialog.dismiss();
-                    });
-                    builder.setCancelable(false);
-                    builder.show();
+                    new MaterialAlertDialogBuilder(MainActivity.this)
+                            .setTitle("Voulez vous continuer en anonyme ?")
+                            .setIcon(R.drawable.baseline_warning_24)
+                            .setMessage("Les resultats ne seront pas sauvegardés !")
+                            .setPositiveButton("Continuer", (dialog, which) -> {
+                                giveUser(null, true);
+                                isVue = true;
+                            })
+                            .setNeutralButton("Créer un compte", (dialog, which) -> {
+                                Intent intent = new Intent(MainActivity.this, CreationDeCompteActivity.class);
+                                startActivity(intent);
+                            })
+                            .setCancelable(false)
+                            .show();
                 } else {
                     giveUser(null, true);
                 }
