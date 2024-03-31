@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         .setNegativeButton("Annuler", (dialog, which) -> {
                             dialog.dismiss();
                         })
+                        .setCancelable(true)
                         .show();
                 return true;
             }
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, CreationDeCompteActivity.class);
                                 startActivity(intent);
                             })
-                            .setCancelable(false)
+                            .setCancelable(true)
                             .show();
                 } else {
                     giveUser(null, true);
