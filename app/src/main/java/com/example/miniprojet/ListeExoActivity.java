@@ -61,13 +61,15 @@ public class ListeExoActivity extends AppCompatActivity {
         qcm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(ListeExoActivity.this, QCMActivity.class);
+                startActivity(intent);
             }
         });
 
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                USER = null;
                 finish();
             }
         });

@@ -4,15 +4,36 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Map;
 
 @Entity(tableName = "questions")
 public class Questions implements Serializable {
-    private String type;
-    private String question;
-    private String reponse;
 
     @PrimaryKey(autoGenerate = true)
     private long id;
+    private String type;
+    private String question;
+    private String reponseJuste;
+    private String reponseFausse1;
+    private String reponseFausse2;
+    private String reponseFausse3;
+
+    public Questions(String type, String question, String reponseJuste, String reponseFausse1, String reponseFausse2, String reponseFausse3) {
+        this.type = type;
+        this.question = question;
+        this.reponseJuste = reponseJuste;
+        this.reponseFausse1 = reponseFausse1;
+        this.reponseFausse2 = reponseFausse2;
+        this.reponseFausse3 = reponseFausse3;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getType() {
         return type;
@@ -30,19 +51,35 @@ public class Questions implements Serializable {
         this.question = question;
     }
 
-    public String getReponse() {
-        return reponse;
+    public String getReponseJuste() {
+        return reponseJuste;
     }
 
-    public void setReponse(String reponse) {
-        this.reponse = reponse;
+    public void setReponseJuste(String reponseJuste) {
+        this.reponseJuste = reponseJuste;
     }
 
-    public long getId() {
-        return id;
+    public String getReponseFausse1() {
+        return reponseFausse1;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setReponseFausse1(String reponseFausse1) {
+        this.reponseFausse1 = reponseFausse1;
+    }
+
+    public String getReponseFausse2() {
+        return reponseFausse2;
+    }
+
+    public void setReponseFausse2(String reponseFausse2) {
+        this.reponseFausse2 = reponseFausse2;
+    }
+
+    public String getReponseFausse3() {
+        return reponseFausse3;
+    }
+
+    public void setReponseFausse3(String reponseFausse3) {
+        this.reponseFausse3 = reponseFausse3;
     }
 }

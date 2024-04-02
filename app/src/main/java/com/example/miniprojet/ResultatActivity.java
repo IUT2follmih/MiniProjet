@@ -78,6 +78,20 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
                     Intent intent = new Intent(ResultatActivity.this, TableAdditionReponsesActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                } else if (nomExo.equals("QCM")) {
+//                    if (errors > 3) {
+//                        btnRecomecer.setText("Corriger mes fautes");
+//                        // TODO : faire la correction de fautes
+//                    } else {
+//                        Intent intent = new Intent(ResultatActivity.this, QCMReponsesActivity.class);
+//                        int type = getIntent().getIntExtra("type", 4);
+//                        intent.putExtra("type", type);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//                    }
+                    Intent intent = new Intent(ResultatActivity.this, QCMActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
             }
         });

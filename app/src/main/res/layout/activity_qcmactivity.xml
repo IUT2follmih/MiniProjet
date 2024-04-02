@@ -8,7 +8,7 @@
     tools:context=".QCMActivity">
 
     <Button
-        android:id="@+id/QCM_button_retour"
+        android:id="@+id/QCM_btn_retour"
         style="@style/Widget.Material3.Button.ElevatedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/QCM_button_suivant"
+            android:id="@+id/QCM_btn_valider"
             style="@style/Widget.Material3.Button.ElevatedButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

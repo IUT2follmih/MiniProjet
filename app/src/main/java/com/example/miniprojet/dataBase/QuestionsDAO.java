@@ -16,6 +16,9 @@ public interface QuestionsDAO {
     @Query("SELECT * FROM questions WHERE id = :id")
     Questions getOne(long id);
 
+    @Query("SELECT * FROM questions WHERE type = :type ORDER BY RANDOM() LIMIT :number")
+    List<Questions> getRandomQuestions(int type, int number);
+
     @Insert
     long insert(Questions question);
 

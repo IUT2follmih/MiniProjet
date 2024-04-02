@@ -32,4 +32,12 @@
     <string name="QCM_radio1">Français</string>
     <string name="QCM_radio2">Histoire</string>
     <string name="QCM_radio3">Géographie</string>
+    <string name="QCM_reponses_progression_text">Question ? / 10</string>
+    <string name="QCM_reponses_radio4">4</string>
+    <string name="QCM_reponses_radio3">3</string>
+    <string name="QCM_reponses_radio2">2</string>
+    <string name="QCM_reponses_radio1">1</string>
+    <string name="QCM_reponses_question">La question</string>
+    <string name="QCM_reponses_btn_suivant">Suivant</string>
+    <string name="QCM_reponses_error">Veuillez sélectioner une réponse</string>
 </resources>
