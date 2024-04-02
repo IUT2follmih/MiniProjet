@@ -15,8 +15,7 @@ public class DataBaseClient {
 
     private DataBaseClient(final Context context) {
         // TODO : fix double database creation
-        appDatabase = Room.databaseBuilder(context, AppDatabase.class, "MyUsers").addCallback(roomDatabaseCallback).build();
-        appDatabase = Room.databaseBuilder(context, AppDatabase.class, "MyQuestions").addCallback(roomDatabaseCallback).build();
+        appDatabase = Room.databaseBuilder(context, AppDatabase.class, "AppDatabase").addCallback(roomDatabaseCallback).build();
     }
 
     public static synchronized DataBaseClient getInstance(Context context) {
