@@ -39,7 +39,7 @@ public class QCMActivity extends AppCompatActivity {
                 Toast.makeText(QCMActivity.this, "Veuillez sélectionner une réponse", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(QCMActivity.this, QCMReponsesActivity.class);
-                intent.putExtra("type", radioButton.getText());
+                intent.putExtra("type", radioButton.getAlpha());
                 startActivity(intent);
             }
         });

@@ -30,8 +30,8 @@ public class QCMReponsesActivity extends AppCompatActivity {
 
     DataBaseClient maBase;
 
-    int type;
-    int numQuestion = 0;
+    String type;
+    int numQuestion = 1;
     int nberror = 0;
 
     boolean isTerminated = false;
@@ -48,15 +48,16 @@ public class QCMReponsesActivity extends AppCompatActivity {
         suivant = findViewById(R.id.QCM_reponses_btn_suivant);
         error = findViewById(R.id.QCM_reponses_error);
 
-        type = getIntent().getIntExtra("type", 4);
+        type = getIntent().getStringExtra("type");
+        maBase = DataBaseClient.getInstance(getApplicationContext());
 
         // On récupère les questions
-        if (type > 3) {
+        if (getNumType() == 0) {
             Toast.makeText(this, "Erreur lors de la récupération des questions", Toast.LENGTH_SHORT).show();
             finish();
-        } else {
-            questions = maBase.getAppDatabase().questionsDAO().getRandomQuestions(type, 10);
         }
+        questions = maBase.getAppDatabase().questionsDAO().getRandomQuestions(getNumType(), 10);
+
 
         // On affiche la première question
         displayQuestion();
@@ -92,8 +93,21 @@ public class QCMReponsesActivity extends AppCompatActivity {
         });
     }
 
+    // TODO : FIX
+    private int getNumType() {
+        switch (type) {
+            case "Français":
+                return 1;
+            case "Histoire":
+                return 2;
+            case "Géographie":
+                return 3;
+            default:
+                return 0;
+        }
+    }
     private void displayQuestion() {
-        progression.setText("Question " + (numQuestion + 1) + "/10");
+        progression.setText("Question " + (numQuestion) + "/10");
         Questions q = questions.get(numQuestion);
         question.setText(q.getQuestion());
         radioGroup.removeAllViews();
@@ -104,7 +118,7 @@ public class QCMReponsesActivity extends AppCompatActivity {
             radioGroup.addView(radioButton);
         }
 
-        if (numQuestion == 9) {
+        if (numQuestion == 10) {
             suivant.setText("Terminer");
             isTerminated = true;
         }
