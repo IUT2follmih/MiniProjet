@@ -39,47 +39,23 @@ public class Questions implements Serializable {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getQuestion() {
         return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public String getReponseJuste() {
         return reponseJuste;
     }
 
-    public void setReponseJuste(String reponseJuste) {
-        this.reponseJuste = reponseJuste;
-    }
-
     public String getReponseFausse1() {
         return reponseFausse1;
-    }
-
-    public void setReponseFausse1(String reponseFausse1) {
-        this.reponseFausse1 = reponseFausse1;
     }
 
     public String getReponseFausse2() {
         return reponseFausse2;
     }
 
-    public void setReponseFausse2(String reponseFausse2) {
-        this.reponseFausse2 = reponseFausse2;
-    }
-
     public String getReponseFausse3() {
         return reponseFausse3;
-    }
-
-    public void setReponseFausse3(String reponseFausse3) {
-        this.reponseFausse3 = reponseFausse3;
     }
 }

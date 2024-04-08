@@ -2,6 +2,7 @@ package com.example.miniprojet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,7 +40,7 @@ public class QCMActivity extends AppCompatActivity {
                 Toast.makeText(QCMActivity.this, "Veuillez sélectionner une réponse", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(QCMActivity.this, QCMReponsesActivity.class);
-                intent.putExtra("type", radioButton.getAlpha());
+                intent.putExtra("type", radioButton.getText().toString());
                 startActivity(intent);
             }
         });

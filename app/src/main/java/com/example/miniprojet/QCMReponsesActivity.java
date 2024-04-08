@@ -1,7 +1,9 @@
 package com.example.miniprojet;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -33,8 +35,9 @@ public class QCMReponsesActivity extends AppCompatActivity {
     String type;
     int numQuestion = 1;
     int nberror = 0;
-
     boolean isTerminated = false;
+
+    private ArrayList<String> shuffledQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +52,16 @@ public class QCMReponsesActivity extends AppCompatActivity {
         error = findViewById(R.id.QCM_reponses_error);
 
         type = getIntent().getStringExtra("type");
+        Log.d("QCMReponsesActivity", "Type : " + type);
         maBase = DataBaseClient.getInstance(getApplicationContext());
+        Log.d("QCMReponsesActivity", "Base de données : " + maBase);
 
         // On récupère les questions
         if (getNumType() == 0) {
             Toast.makeText(this, "Erreur lors de la récupération des questions", Toast.LENGTH_SHORT).show();
             finish();
         }
-        questions = maBase.getAppDatabase().questionsDAO().getRandomQuestions(getNumType(), 10);
-
-
-        // On affiche la première question
-        displayQuestion();
-
+        getQuestions();
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +79,7 @@ public class QCMReponsesActivity extends AppCompatActivity {
                     if (radioButton == null) {
                         error.setVisibility(View.VISIBLE);
                     } else {
-                        if (radioButton.getText().equals(questions.get(numQuestion).getReponseJuste())) {
+                        if (radioButton.getText().equals(questions.get(numQuestion - 1).getReponseJuste())) {
                             numQuestion++;
                             displayQuestion();
                         } else {
@@ -106,9 +106,15 @@ public class QCMReponsesActivity extends AppCompatActivity {
                 return 0;
         }
     }
+
     private void displayQuestion() {
         progression.setText("Question " + (numQuestion) + "/10");
-        Questions q = questions.get(numQuestion);
+        error.setVisibility(View.GONE);
+        if (numQuestion == 10) {
+            suivant.setText("Terminer");
+            isTerminated = true;
+        }
+        Questions q = questions.get(numQuestion - 1);
         question.setText(q.getQuestion());
         radioGroup.removeAllViews();
         shuffleQuestions();
@@ -117,20 +123,38 @@ public class QCMReponsesActivity extends AppCompatActivity {
             radioButton.setText(reponse);
             radioGroup.addView(radioButton);
         }
-
-        if (numQuestion == 10) {
-            suivant.setText("Terminer");
-            isTerminated = true;
-        }
     }
 
     public ArrayList<String> shuffleQuestions() {
         ArrayList<String> shuffledQuestions = new ArrayList<>();
-        shuffledQuestions.add(questions.get(numQuestion).getReponseFausse1());
-        shuffledQuestions.add(questions.get(numQuestion).getReponseFausse2());
-        shuffledQuestions.add(questions.get(numQuestion).getReponseFausse3());
-        shuffledQuestions.add(questions.get(numQuestion).getReponseJuste());
+        shuffledQuestions.add(questions.get(numQuestion - 1).getReponseFausse1());
+        shuffledQuestions.add(questions.get(numQuestion - 1).getReponseFausse2());
+        shuffledQuestions.add(questions.get(numQuestion - 1).getReponseFausse3());
+        shuffledQuestions.add(questions.get(numQuestion - 1).getReponseJuste());
         Collections.shuffle(shuffledQuestions);
         return shuffledQuestions;
+    }
+
+    public void getQuestions() {
+        class GetQuestions extends AsyncTask<Void, Void, List<Questions>> {
+
+            @Override
+            protected List<Questions> doInBackground(Void... voids) {
+                List<Questions> questionsList = maBase.getAppDatabase()
+                        .questionsDAO()
+                        .getRandomQuestions(getNumType(), 10);
+                return questionsList;
+            }
+
+            @Override
+            protected void onPostExecute(List<Questions> questionsList) {
+                super.onPostExecute(questionsList);
+                questions = questionsList;
+                displayQuestion();
+            }
+        }
+
+        GetQuestions gq = new GetQuestions();
+        gq.execute();
     }
 }

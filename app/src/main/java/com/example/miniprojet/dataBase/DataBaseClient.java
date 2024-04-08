@@ -103,7 +103,7 @@ public class DataBaseClient {
             // Français
             "Que signifie le mot 'époustouflant' ?",
             "Que signifie le mot 'moudre' ?",
-            "Que signifie le mot 'embrasement' ?",
+            "Que signifie le mot 'Raffiner' ?",
             "Que signifie le mot 'débiter' ?",
 
             "Quel est le synonyme de 'beau' ?",
@@ -122,10 +122,10 @@ public class DataBaseClient {
             "Quel est le nom du premier empereur romain ?",
             "Quel est le nom du premier roi d'Angleterre ?",
 
-            "Quel est la date de la prise de la Bastille ?",
-            "Quel est la date de la fin de la seconde guerre mondiale ?",
-            "Quel est la date de la mort de Louis XVI ?",
-            "Quel est la date de decouverte de l''Amérique par Christophe Colomb ?",
+            "Quelle est la date de la prise de la Bastille ?",
+            "Quelle est la date de la fin de la seconde guerre mondiale ?",
+            "Quelle est la date de la mort de Louis XVI ?",
+            "Quelle est la date de decouverte de l''Amérique par Christophe Colomb ?",
 
             "Quel est l''evenement le plus emblématique du japon ?",
             "Quel est l''evenement le plus emblématique de la France ?",
@@ -153,13 +153,13 @@ public class DataBaseClient {
             // Français
             "Surprenant",
             "Broyer",
-            "Feu",
-            "Parler",
+            "Delicat",
+            "Ecouler",
 
             "Joli",
             "Moche",
             "Haut",
-            "Petit",
+            "Pas grand",
 
             "Ramasser",
             "Droit",
@@ -178,9 +178,9 @@ public class DataBaseClient {
             "12 octobre 1492",
 
             "La bombe atomique",
-            "La revolution",
+            "La revolution Francaise",
             "La chute du mur de Berlin",
-            "La coupe du monde",
+            "Fondation de Rome",
 
             // Géographie
             "Paris",
@@ -190,13 +190,8 @@ public class DataBaseClient {
 
             "Russie",
             "Vatican",
-            "Chine",
-            "Tuvalu",
-
-            "Afrique",
-            "Etats-Unis",
-            "Japon",
-            "France",
+            "Inde",
+            "Antarctique",
 
             "Afrique",
             "Etats-Unis",
@@ -205,168 +200,153 @@ public class DataBaseClient {
     };
 
     public static String[] reponseFausse1 = {
-            // Français
-            "Surprenant",
-            "Broyer",
-            "Feu",
-            "Parler",
+            /// Français
+            "Banal",
+            "Remuer",
+            "Brut",
+            "Stocker",
 
-            "Joli",
-            "Moche",
-            "Haut",
-            "Petit",
+            "Abject",
+            "Eblouissant",
+            "Court",
+            "Adulte",
 
-            "Ramasser",
-            "Droit",
-            "Rare",
-            "Lent",
+            "Laisser",
+            "Baisser",
+            "Normal",
+            "Accéléré",
 
             // Histoire
-            "George Washington",
-            "Clovis",
-            "Jules César",
-            "Guillaume le Conquérant",
+            "Abraham Lincoln",
+            "Louis XIV",
+            "Napoléon Bonaparte",
+            "Richard the Lionheart",
 
-            "14 juillet 1789",
-            "8 mai 1945",
-            "21 janvier 1793",
-            "12 octobre 1492",
+            "19 Julliet 1951",
+            "05 Novembre 1800",
+            "24 Juin 1836",
+            "19 Mar 1811",
 
-            "La bombe atomique",
-            "La revolution",
-            "La chute du mur de Berlin",
+            "Proclamation de la République Populaire",
+            "Fete de la musique",
+            "La marche de l''Est",
             "La coupe du monde",
 
             // Géographie
-            "Paris",
-            "Berlin",
-            "Pékin",
-            "Budapest",
+            "Lyon",
+            "Munich",
+            "Shanghai",
+            "Prague",
 
-            "Russie",
-            "Vatican",
+            "Canada",
+            "Monaco",
             "Chine",
             "Tuvalu",
 
-            "Afrique",
-            "Etats-Unis",
-            "Japon",
-            "France",
-
-            "Afrique",
-            "Etats-Unis",
-            "Japon",
-            "France",
+            "Arabie Saoudite",
+            "Mexique",
+            "Corée du Sud",
+            "Angleterre",
     };
 
     public static String[] reponseFausse2 = {
             // Français
-            "Surprenant",
-            "Broyer",
-            "Feu",
-            "Parler",
+            "Mediocre",
+            "Casser",
+            "Grossier",
+            "Garder",
 
-            "Joli",
-            "Moche",
-            "Haut",
-            "Petit",
+            "Déplaisant",
+            "Angélique",
+            "Bas",
+            "Enorme",
 
-            "Ramasser",
-            "Droit",
-            "Rare",
-            "Lent",
+            "Abandonner",
+            "Replier",
+            "Habituel",
+            "Instantané",
 
             // Histoire
-            "George Washington",
-            "Clovis",
-            "Jules César",
-            "Guillaume le Conquérant",
+            "Thomas Jefferson",
+            "Louis XVI",
+            "Augustus",
+            "Henry VIII",
 
-            "14 juillet 1789",
-            "8 mai 1945",
-            "21 janvier 1793",
-            "12 octobre 1492",
+            "20 Mars 1948",
+            "20 Octobre 1760",
+            "25 Juillet 1971",
+            "23 Juillet 1962",
 
-            "La bombe atomique",
-            "La revolution",
-            "La chute du mur de Berlin",
-            "La coupe du monde",
+            "Guerre de 100 ans",
+            "Noel",
+            "La prise de la Bastille",
+            "Katheri Deftera",
 
             // Géographie
-            "Paris",
-            "Berlin",
-            "Pékin",
-            "Budapest",
+            "Marseille",
+            "Hamburg",
+            "Guangzhou",
+            "Vienna",
 
-            "Russie",
+            "Etats-Unis",
+            "Nauru",
+            "Indonésie",
             "Vatican",
+
+            "Australie",
+            "Canada",
             "Chine",
-            "Tuvalu",
-
-            "Afrique",
-            "Etats-Unis",
-            "Japon",
-            "France",
-
-            "Afrique",
-            "Etats-Unis",
-            "Japon",
-            "France",
+            "Espagne",
     };
 
     public static String[] reponseFausse3 = {
             // Français
-            "Surprenant",
-            "Broyer",
-            "Feu",
-            "Parler",
+            "Drole",
+            "Melanger",
+            "Maladroit",
+            "Bloquer",
 
-            "Joli",
-            "Moche",
-            "Haut",
-            "Petit",
+            "Horrible",
+            "Divin",
+            "Abime",
+            "Démesuré",
 
-            "Ramasser",
-            "Droit",
-            "Rare",
-            "Lent",
+            "Debarrasser",
+            "Plier",
+            "Commun",
+            "Soudain",
 
             // Histoire
-            "George Washington",
-            "Clovis",
-            "Jules César",
-            "Guillaume le Conquérant",
+            "John Adams",
+            "Charles VII",
+            "Marcus Aurelius",
+            "Edward the Confessor",
 
-            "14 juillet 1789",
-            "8 mai 1945",
-            "21 janvier 1793",
-            "12 octobre 1492",
+            "1 Fevrier 1618",
+            "19 Mai 1973",
+            "8 Mai 1619",
+            "6 Decembre 1665",
 
-            "La bombe atomique",
-            "La revolution",
-            "La chute du mur de Berlin",
-            "La coupe du monde",
+            "La guerre d''indépendance",
+            "L''assomption",
+            "Révolte contre le régime de Slobodan Milošević",
+            "Épiphanie",
 
             // Géographie
-            "Paris",
-            "Berlin",
-            "Pékin",
-            "Budapest",
+            "Toulouse",
+            "Frankfurt",
+            "Chongqing",
+            "Warsaw",
 
-            "Russie",
-            "Vatican",
             "Chine",
             "Tuvalu",
+            "Pakistan",
+            "Palaos",
 
-            "Afrique",
             "Etats-Unis",
-            "Japon",
-            "France",
-
-            "Afrique",
-            "Etats-Unis",
-            "Japon",
-            "France",
+            "Brésil",
+            "Vietnam",
+            "Grece",
     };
 }
 
