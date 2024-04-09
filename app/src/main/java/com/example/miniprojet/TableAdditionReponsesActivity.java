@@ -30,6 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class TableAdditionReponsesActivity extends AppCompatActivity implements Serializable {
     // Variable permettant de récupérer l'utilisateur
     public static Users USER;
+    CountDownTimer countDownTimer;
 
     // Composants graphiques
     LinearLayout linear;
@@ -77,13 +78,23 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
         }
 
         // Ajout d'un timer de 60 secondes pour répondre à la table
-        new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timer.setText("Temps restant: " + millisUntilFinished / 1000 + "s");
+
+                // Changement de couleur du timer si il reste moins de 10 secondes
+                if (millisUntilFinished / 1000 < 10) {
+                    timer.setTextColor(Color.RED);
+                }
+
+                if (valider.isPressed()) {
+                    cancel();
+                }
             }
 
             public void onFinish() {
                 Toast.makeText(TableAdditionReponsesActivity.this, "Temps écoulé", Toast.LENGTH_SHORT).show();
+                // faire que ca arrete le timer
                 valider.callOnClick();
             }
         }.start();
@@ -126,5 +137,13 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -28,6 +29,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
     // Constantes
     public static Users USER;
     public static String TABLE_KEY = "1";
+    CountDownTimer countDownTimer;
 
     // Composants graphiques
     LinearLayout linear;
@@ -86,9 +88,17 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
          * Sinon, on valide les réponses manuellement
          * On affiche un toast pour indiquer que le temps est écoulé
          */
-        new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timer.setText("Temps restant: " + millisUntilFinished / 1000 + "s");
+
+                if (millisUntilFinished / 1000 < 10) {
+                    timer.setTextColor(Color.RED);
+                }
+
+                if (valider.isPressed()) {
+                    cancel();
+                }
             }
 
             public void onFinish() {
@@ -140,6 +150,13 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
         retour.setOnClickListener(view -> {
             finish();
         });
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 }
