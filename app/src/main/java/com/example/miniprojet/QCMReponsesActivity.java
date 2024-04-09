@@ -19,12 +19,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.miniprojet.dataBase.DataBaseClient;
 import com.example.miniprojet.dataBase.Questions;
+import com.example.miniprojet.dataBase.Users;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class QCMReponsesActivity extends AppCompatActivity {
+    public static Users USER;
     TextView progression, question, error;
     RadioGroup radioGroup;
     Button suivant;
@@ -52,9 +54,9 @@ public class QCMReponsesActivity extends AppCompatActivity {
         error = findViewById(R.id.QCM_reponses_error);
 
         type = getIntent().getStringExtra("type");
-        Log.d("QCMReponsesActivity", "Type : " + type);
         maBase = DataBaseClient.getInstance(getApplicationContext());
-        Log.d("QCMReponsesActivity", "Base de données : " + maBase);
+
+        Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
 
         // On récupère les questions
         if (getNumType() == 0) {
@@ -68,6 +70,7 @@ public class QCMReponsesActivity extends AppCompatActivity {
                 if (isTerminated) {
                     // On termine le QCM
                     Intent intent = new Intent(QCMReponsesActivity.this, ResultatActivity.class);
+                    intent.putExtra(String.valueOf(ResultatActivity.USER), user);
                     intent.putExtra(ResultatActivity.NOM_EXO, "QCM");
                     intent.putExtra(ResultatActivity.NB_ERROR, nberror);
                     intent.putExtra("type", type);

@@ -14,7 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.miniprojet.dataBase.Users;
+
 public class QCMActivity extends AppCompatActivity {
+    public static Users USER;
 
     Button btnRetour, btnValider;
     RadioGroup radioGroup;
@@ -29,6 +32,8 @@ public class QCMActivity extends AppCompatActivity {
         btnValider = findViewById(R.id.QCM_btn_valider);
         radioGroup = findViewById(R.id.QCM_radioGroup);
 
+        Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
+
         btnRetour.setOnClickListener(v -> {
             finish();
         });
@@ -40,6 +45,7 @@ public class QCMActivity extends AppCompatActivity {
                 Toast.makeText(QCMActivity.this, "Veuillez sélectionner une réponse", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(QCMActivity.this, QCMReponsesActivity.class);
+                intent.putExtra(String.valueOf(QCMReponsesActivity.USER), user);
                 intent.putExtra("type", radioButton.getText().toString());
                 startActivity(intent);
             }

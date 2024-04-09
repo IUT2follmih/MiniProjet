@@ -3,6 +3,7 @@ package com.example.miniprojet;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         maBase = DataBaseClient.getInstance(getApplicationContext());
 
-        btnAno = (Button) findViewById(R.id.Main_btn_Ano);
-        btnCrea = (Button) findViewById(R.id.Main_btn_crea);
-        txtListVide = (TextView) findViewById(R.id.Main_text_list_vide);
+        btnAno = findViewById(R.id.Main_btn_Ano);
+        btnCrea = findViewById(R.id.Main_btn_crea);
+        txtListVide = findViewById(R.id.Main_text_list_vide);
 
-        userList = (ListView) findViewById(R.id.Main_list_users);
+        userList = findViewById(R.id.Main_list_users);
 
         adaptater = new UserAdaptater(this, new ArrayList<Users>());
         userList.setAdapter(adaptater);
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         userList.setEmptyView(txtListVide);
 
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Users user = adaptater.getItem(position);

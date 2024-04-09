@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.miniprojet.dataBase.Users;
+
 import java.io.Serializable;
 
 public class ResultatActivity extends AppCompatActivity implements Serializable {
+    public static Users USER;
 
     public static String NOM_EXO = "NOMEXO";
     public static String NB_ERROR = "0";
@@ -27,16 +30,18 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultat);
 
-        btnReExo = (Button) findViewById(R.id.Result_btn_retour_exo);
-        btnReUser = (Button) findViewById(R.id.Result_btn_retour_comptes);
-        btnRecomecer = (Button) findViewById(R.id.Result_btn_recommencer);
+        btnReExo = findViewById(R.id.Result_btn_retour_exo);
+        btnReUser = findViewById(R.id.Result_btn_retour_comptes);
+        btnRecomecer = findViewById(R.id.Result_btn_recommencer);
 
-        name = (TextView) findViewById(R.id.Result_text_name);
-        note = (TextView) findViewById(R.id.Result_text_note);
-        result = (TextView) findViewById(R.id.Result_text_result);
+        name = findViewById(R.id.Result_text_name);
+        note = findViewById(R.id.Result_text_note);
+        result = findViewById(R.id.Result_text_result);
 
         String nomExo = getIntent().getStringExtra(NOM_EXO);
         Integer errors = getIntent().getIntExtra(NB_ERROR, 0);
+
+        Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
 
         name.setText("Resultat de l'exercice : " + nomExo);
         note.setText((10 - errors) + "/10");
@@ -62,6 +67,7 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
 //                    }
 
                     Intent intent = new Intent(ResultatActivity.this, TableDeMultiplicationReponsesActivity.class);
+                    intent.putExtra(String.valueOf(TableDeMultiplicationReponsesActivity.USER), user);
                     intent.putExtra(TableDeMultiplicationReponsesActivity.TABLE_KEY, getIntent().getIntExtra(TABLE_KEY, 1));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -76,6 +82,7 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
 //                    }
 
                     Intent intent = new Intent(ResultatActivity.this, TableAdditionReponsesActivity.class);
+                    intent.putExtra(String.valueOf(TableAdditionReponsesActivity.USER), user);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } else if (nomExo.equals("QCM")) {
@@ -90,6 +97,7 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
 //                        startActivity(intent);
 //                    }
                     Intent intent = new Intent(ResultatActivity.this, QCMActivity.class);
+                    intent.putExtra(String.valueOf(QCMActivity.USER), user);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -100,6 +108,12 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultatActivity.this, ListeExoActivity.class);
+                if (user == null) {
+                    intent.putExtra(String.valueOf(ListeExoActivity.ANONYME), true);
+                } else {
+                    intent.putExtra(String.valueOf(ListeExoActivity.ANONYME), false);
+                    intent.putExtra(String.valueOf(ListeExoActivity.USER), user);
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

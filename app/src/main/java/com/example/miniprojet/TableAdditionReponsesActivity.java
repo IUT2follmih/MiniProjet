@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.miniprojet.dataBase.Users;
 import com.example.miniprojet.tableAddition.Addition;
 import com.example.miniprojet.tableAddition.TableAddition;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class TableAdditionReponsesActivity extends AppCompatActivity implements Serializable {
+    public static Users USER;
 
     LinearLayout linear;
     Button valider, retour;
@@ -43,7 +45,9 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
 
         TableAddition tableAdd = new TableAddition();
 
-        layout = (LinearLayout) findViewById(R.id.Table_add_layout);
+        layout = findViewById(R.id.Table_add_layout);
+
+        Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
 
         for (Addition add : tableAdd.getAdditions()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
@@ -69,6 +73,7 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
             Integer nbErr = tableAdd.getNbErreurs();
             Toast.makeText(TableAdditionReponsesActivity.this, "Vous avez " + tableAdd.getNbErreurs() + " erreurs", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(TableAdditionReponsesActivity.this, ResultatActivity.class);
+            intent.putExtra(String.valueOf(ResultatActivity.USER), user);
             intent.putExtra(ResultatActivity.NOM_EXO, "Table d'addition");
             intent.putExtra(ResultatActivity.NB_ERROR, nbErr);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

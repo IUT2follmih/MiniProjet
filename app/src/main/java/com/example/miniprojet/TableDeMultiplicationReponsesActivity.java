@@ -14,12 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.miniprojet.dataBase.Users;
 import com.example.miniprojet.tableMultiplication.Multiplication;
 import com.example.miniprojet.tableMultiplication.TableDeMultiplication;
 
 import java.util.ArrayList;
 
 public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
+    public static Users USER;
     public static String TABLE_KEY = "1";
 
     LinearLayout linear;
@@ -38,21 +40,23 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
 
         ArrayList<EditText> resList = new ArrayList<>();
 
-        layout = (LinearLayout) findViewById(R.id.Table_mult_layout);
+        layout = findViewById(R.id.Table_mult_layout);
 
         int key = getIntent().getIntExtra(TABLE_KEY, 1);
         TableDeMultiplication tableMult = new TableDeMultiplication(key);
 
         linear.removeAllViews();
 
+        Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
+
 
         for (Multiplication mult : tableMult.getMultiplications()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
 
-            calcul = (TextView) linearTMP.findViewById(R.id.template_calcul);
+            calcul = linearTMP.findViewById(R.id.template_calcul);
             calcul.setText(mult.getA() + "x" + mult.getB() + "=");
 
-            resultat = (EditText) linearTMP.findViewById(R.id.template_resultat);
+            resultat = linearTMP.findViewById(R.id.template_resultat);
             resList.add(resultat);
             linear.addView(linearTMP);
         }
@@ -70,6 +74,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
                 Integer nbErr = tableMult.getNbErreurs();
                 Toast.makeText(TableDeMultiplicationReponsesActivity.this, "Bon!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TableDeMultiplicationReponsesActivity.this, ResultatActivity.class);
+                intent.putExtra(String.valueOf(ResultatActivity.USER), user);
                 intent.putExtra(ResultatActivity.NOM_EXO, "Table de multiplication");
                 intent.putExtra(ResultatActivity.NB_ERROR, nbErr);
                 intent.putExtra(ResultatActivity.TABLE_KEY, key);
