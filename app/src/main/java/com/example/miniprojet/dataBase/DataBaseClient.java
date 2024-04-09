@@ -7,17 +7,31 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-
+/**
+ *  DataBaseClient
+ *  Singleton qui permet de créer une instance de la base de données
+ *  et de la retourner
+ *  Cette classe permet aussi de peupler la base de données à sa création
+ */
 public class DataBaseClient {
 
     private static DataBaseClient instance;
     private AppDatabase appDatabase;
 
+    /**
+     * Constructeur
+     * @param context
+     */
     private DataBaseClient(final Context context) {
-        // TODO : fix double database creation
         appDatabase = Room.databaseBuilder(context, AppDatabase.class, "AppDatabase").addCallback(roomDatabaseCallback).build();
     }
 
+    /**
+     * Méthode statique
+     * Retourne l'instance de l'objet DataBaseClient
+     * @param context
+     * @return
+     */
     public static synchronized DataBaseClient getInstance(Context context) {
         if (instance == null) {
             instance = new DataBaseClient(context);
@@ -25,10 +39,17 @@ public class DataBaseClient {
         return instance;
     }
 
+    /**
+     * Retourne l'objet représentant la base de données de votre application
+     * @return
+     */
     public AppDatabase getAppDatabase() {
         return appDatabase;
     }
 
+    /**
+     * Objet permettant de peupler la base de données à sa création
+     */
     RoomDatabase.Callback roomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -36,10 +57,18 @@ public class DataBaseClient {
         }
     };
 
+    /**
+     * Retourne l'objet représentant la table Questions
+     * @return
+     */
     public QuestionsDAO getQuestionsDAO() {
         return appDatabase.questionsDAO();
     }
 
+    /**
+     * Peuple la base de données à sa création
+     * avec les questions et les réponses
+     */
     public void creatioInitQuestions() {
         new Thread(new Runnable() {
             @Override
@@ -54,6 +83,9 @@ public class DataBaseClient {
         }).start();
     }
 
+    /**
+     * Tableau des types de questions
+     */
     public static final String[] types = {
             // 1 = Français
             // 2 = Histoire
@@ -99,6 +131,9 @@ public class DataBaseClient {
             "3",
     };
 
+    /**
+     * Tableau des questions
+     */
     public static final String[] questions = {
             // Français
             "Que signifie le mot 'époustouflant' ?",
@@ -149,6 +184,9 @@ public class DataBaseClient {
             "Ou se trouve la ville de Paris ?",
     };
 
+    /**
+     * Tableau des réponses
+     */
     public static String[] reponseCorrect = {
             // Français
             "Surprenant",
@@ -199,6 +237,9 @@ public class DataBaseClient {
             "France",
     };
 
+    /**
+     * Tableau des réponses fausses 1
+     */
     public static String[] reponseFausse1 = {
             /// Français
             "Banal",
@@ -249,6 +290,9 @@ public class DataBaseClient {
             "Angleterre",
     };
 
+    /**
+     * Tableau des réponses fausses 2
+     */
     public static String[] reponseFausse2 = {
             // Français
             "Mediocre",
@@ -299,6 +343,9 @@ public class DataBaseClient {
             "Espagne",
     };
 
+    /**
+     * Tableau des réponses fausses 3
+     */
     public static String[] reponseFausse3 = {
             // Français
             "Drole",

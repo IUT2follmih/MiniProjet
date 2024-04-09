@@ -21,37 +21,54 @@ import com.example.miniprojet.tableMultiplication.TableDeMultiplication;
 
 import java.util.ArrayList;
 
+/**
+ * Activité permettant de répondre à une table de multiplication
+ */
 public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
+    // Constantes
     public static Users USER;
     public static String TABLE_KEY = "1";
 
+    // Composants graphiques
     LinearLayout linear;
     Button valider, retour;
     TextView calcul, timer;
     EditText resultat;
     RelativeLayout layout;
+
+    /**
+     * Méthode appelée à la création de l'activité
+     * @param savedInstanceState état de l'activité sauvegardé
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_de_multiplication_reponses);
 
+        // Récupération des composants graphiques
         linear = findViewById(R.id.Table_mult_res_layout);
         valider = findViewById(R.id.Table_mult_res_btn);
         retour = findViewById(R.id.Table_mult_retour_btn);
         timer = findViewById(R.id.Table_mult_timer);
 
-        ArrayList<EditText> resList = new ArrayList<>();
-
         layout = findViewById(R.id.Table_mult_layout);
 
+        // Initialisation de la liste des résultats
+        ArrayList<EditText> resList = new ArrayList<>();
+
+        // Récupération de la table de multiplication
         int key = getIntent().getIntExtra(TABLE_KEY, 1);
         TableDeMultiplication tableMult = new TableDeMultiplication(key);
 
+        // Clear de la vue
         linear.removeAllViews();
 
+        // Récupération de l'utilisateur
         Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
 
-
+        /**
+         * Création des champs de réponse pour chaque multiplication de la table de multiplication
+         */
         for (Multiplication mult : tableMult.getMultiplications()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
 
@@ -63,6 +80,12 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
             linear.addView(linearTMP);
         }
 
+        /**
+         * Ajout d'un timer de 60 secondes
+         * Si le timer arrive à 0, on valide les réponses
+         * Sinon, on valide les réponses manuellement
+         * On affiche un toast pour indiquer que le temps est écoulé
+         */
         new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timer.setText("Temps restant: " + millisUntilFinished / 1000 + "s");
@@ -74,6 +97,13 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
             }
         }.start();
 
+        /**
+         * Action lors du clic sur le bouton valider
+         * On récupère les réponses de l'utilisateur
+         * On les compare avec les réponses attendues
+         * On affiche le nombre d'erreurs
+         * On affiche l'activité de résultat
+         */
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +125,10 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Action lors du clic sur le layout
+         * On cache le clavier
+         */
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

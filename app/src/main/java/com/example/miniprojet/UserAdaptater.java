@@ -11,7 +11,11 @@ import java.util.List;
 
 import com.example.miniprojet.dataBase.Users;
 
-
+/**
+ * Adaptateur pour les utilisateurs (Users)
+ * Permet de convertir un objet Users en une ligne de la listeView
+ * @see Users
+ */
 public class UserAdaptater extends ArrayAdapter<Users>{
 
     public UserAdaptater(Context mContext, List<Users> usersList){
@@ -30,8 +34,8 @@ public class UserAdaptater extends ArrayAdapter<Users>{
         final View rowView = inflater.inflate(R.layout.template_user, parent, false);
 
         // Récupération des objets graphiques dans le template
-        TextView prenom = (TextView) rowView.findViewById(R.id.Template_user_prenom);
-        TextView nom = (TextView) rowView.findViewById(R.id.Template_user_nom);
+        TextView prenom = rowView.findViewById(R.id.Template_user_prenom);
+        TextView nom = rowView.findViewById(R.id.Template_user_nom);
 
         //
         prenom.setText(users.getPrenom());

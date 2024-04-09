@@ -25,37 +25,49 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Activité permettant de répondre à un QCM
+ * On récupère le type de QCM à afficher
+ * On récupère les questions correspondantes
+ * On affiche les questions et les réponses possibles
+ */
 public class QCMReponsesActivity extends AppCompatActivity {
+    // Constantes
     public static Users USER;
-    TextView progression, question, error;
-    RadioGroup radioGroup;
-    Button suivant;
-    List<Questions> questions;
-
-    DataBaseClient maBase;
-
     String type;
     int numQuestion = 1;
     int nberror = 0;
     boolean isTerminated = false;
+    List<Questions> questions;
 
-    private ArrayList<String> shuffledQuestions;
+    // Composants graphiques
+    TextView progression, question, error;
+    RadioGroup radioGroup;
+    Button suivant;
 
+    // Base de données
+    DataBaseClient maBase;
+
+    /**
+     * Méthode appelée à la création de l'activité
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qcmreponses);
 
-        // On récupère les éléments de la vue
+        // Recupération des composants graphiques
         progression = findViewById(R.id.QCM_reponses_progression);
         question = findViewById(R.id.QCM_reponses_question);
         radioGroup = findViewById(R.id.QCM_reponses_radioGroup);
         suivant = findViewById(R.id.QCM_reponses_btn_suivant);
         error = findViewById(R.id.QCM_reponses_error);
 
+        // On récupère le type de QCM et la base de données
         type = getIntent().getStringExtra("type");
         maBase = DataBaseClient.getInstance(getApplicationContext());
 
+        // On récupère l'utilisateur
         Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
 
         // On récupère les questions
@@ -64,6 +76,15 @@ public class QCMReponsesActivity extends AppCompatActivity {
             finish();
         }
         getQuestions();
+
+        /**
+         * Action lors du clic sur le bouton suivant
+         * Si le QCM est terminé, on affiche le résultat
+         * Sinon, on vérifie si la réponse est juste
+         * Si oui, on passe à la question suivante
+         * Sinon, on incrémente le nombre d'erreurs et on passe à la question suivante
+         * On affiche la question suivante
+         */
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +117,11 @@ public class QCMReponsesActivity extends AppCompatActivity {
         });
     }
 
-    // TODO : FIX
+    /**
+     * Méthode permettant de récupérer le type de QCM
+     *
+     * @return le type de QCM
+     */
     private int getNumType() {
         switch (type) {
             case "Français":
@@ -110,13 +135,24 @@ public class QCMReponsesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Méthode permettant d'afficher la question
+     * On affiche le numéro de la question
+     * On affiche la question
+     * On affiche les réponses possibles
+     * Si c'est la dernière question, on change le texte du bouton suivant
+     * On mélange les réponses
+     * On affiche les réponses
+     */
     private void displayQuestion() {
         progression.setText("Question " + (numQuestion) + "/10");
         error.setVisibility(View.GONE);
+
         if (numQuestion == 10) {
             suivant.setText("Terminer");
             isTerminated = true;
         }
+
         Questions q = questions.get(numQuestion - 1);
         question.setText(q.getQuestion());
         radioGroup.removeAllViews();
@@ -128,6 +164,12 @@ public class QCMReponsesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Méthode permettant de mélanger les réponses
+     * On ajoute les réponses possibles à une liste
+     * On mélange la liste
+     * @return la liste mélangée
+     */
     public ArrayList<String> shuffleQuestions() {
         ArrayList<String> shuffledQuestions = new ArrayList<>();
         shuffledQuestions.add(questions.get(numQuestion - 1).getReponseFausse1());
@@ -138,6 +180,11 @@ public class QCMReponsesActivity extends AppCompatActivity {
         return shuffledQuestions;
     }
 
+    /**
+     * Méthode permettant de récupérer les questions
+     * On récupère les questions de la base de données
+     * On affiche les questions
+     */
     public void getQuestions() {
         class GetQuestions extends AsyncTask<Void, Void, List<Questions>> {
 
@@ -157,6 +204,7 @@ public class QCMReponsesActivity extends AppCompatActivity {
             }
         }
 
+        // On exécute la tâche asynchrone
         GetQuestions gq = new GetQuestions();
         gq.execute();
     }

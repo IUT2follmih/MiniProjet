@@ -15,24 +15,38 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.miniprojet.dataBase.Users;
 
+/**
+ * Activité permettant de choisir le type d'exercice à réaliser
+ * Possibilité de choisir entre les tables de multiplication, les tables d'addition et un QCM
+ */
 public class ListeExoActivity extends AppCompatActivity {
+    // Constantes
     public static Users USER;
-
-    Button multi, add, qcm, retour;
-    TextView userName;
     public static boolean ANONYME = false;
 
+    // Composants graphiques
+    Button multi, add, qcm, retour;
+    TextView userName;
+
+    /**
+     * Méthode appelée à la création de l'activité
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_exo);
 
+        // Récupération des composants graphiques
         multi = findViewById(R.id.List_btn_multiplication);
         add = findViewById(R.id.List_btn_addition);
         qcm = findViewById(R.id.List_btn_qcm);
         retour = findViewById(R.id.List_btn_retour);
 
         userName = findViewById(R.id.Liste_text_user);
+
+        // Récupération de l'utilisateur
         Users user = null;
 
         boolean isAno = getIntent().getBooleanExtra(String.valueOf(ANONYME), false);
@@ -44,6 +58,8 @@ public class ListeExoActivity extends AppCompatActivity {
         }
 
         Users finalUser = user;
+
+        // Gestions des clics sur le bouton de l'exercice multiplcation
         multi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +71,7 @@ public class ListeExoActivity extends AppCompatActivity {
             }
         });
 
+        // Gestions des clics sur le bouton de l'exercice d'addition
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +83,7 @@ public class ListeExoActivity extends AppCompatActivity {
             }
         });
 
+        // Gestions des clics sur le bouton de l'exercice QCM
         qcm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,9 +95,11 @@ public class ListeExoActivity extends AppCompatActivity {
             }
         });
 
+        // Gestions des clics sur le bouton de retour
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // On vide l'utilisateur
                 USER = null;
                 finish();
             }

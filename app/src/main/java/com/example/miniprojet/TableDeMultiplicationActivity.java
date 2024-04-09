@@ -11,27 +11,39 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.miniprojet.dataBase.Users;
 
+/**
+ * Activité permettant de choisir la table de multiplication à réviser
+ */
 public class TableDeMultiplicationActivity extends AppCompatActivity {
+    // Variable permettant de stocker l'utilisateur
     public static Users USER;
 
+    // Composants graphiques
     NumberPicker nbPicker;
     Button btnValider, btnRetour;
+
+    /**
+     * Méthode appelée à la création de l'activité
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // On charge le XML pour créer l'arbre graphique
         setContentView(R.layout.activity_table_de_multiplication);
 
+        // Récupération des composants graphiques
         nbPicker = findViewById(R.id.Table_mult_nbPicker);
         nbPicker.setMaxValue(9);
         nbPicker.setMinValue(1);
         btnValider = findViewById(R.id.Table_mult_btnTable);
         btnRetour = findViewById(R.id.Table_mult_button_retour);
 
+        // Récupération de l'utilisateur
         Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
-        Log.d("TableDeMultiplicationActivity", "TableDeMult: " + user);
+        //Log.d("TableDeMultiplicationActivity", "TableDeMult: " + user);
 
+        // Gestion du clic sur le bouton de retour
         btnRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +53,7 @@ public class TableDeMultiplicationActivity extends AppCompatActivity {
             }
         });
 
-
+        // Gestion du clic sur le bouton de validation
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

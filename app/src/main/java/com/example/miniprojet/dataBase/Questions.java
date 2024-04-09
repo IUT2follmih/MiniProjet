@@ -6,6 +6,9 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Classe représentant une entité Question
+ */
 @Entity(tableName = "questions")
 public class Questions implements Serializable {
 
@@ -18,6 +21,15 @@ public class Questions implements Serializable {
     private String reponseFausse2;
     private String reponseFausse3;
 
+    /**
+     * Constructeur
+     * @param type
+     * @param question
+     * @param reponseJuste
+     * @param reponseFausse1
+     * @param reponseFausse2
+     * @param reponseFausse3
+     */
     public Questions(String type, String question, String reponseJuste, String reponseFausse1, String reponseFausse2, String reponseFausse3) {
         this.type = type;
         this.question = question;

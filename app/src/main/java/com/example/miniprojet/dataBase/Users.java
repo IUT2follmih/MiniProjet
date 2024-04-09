@@ -5,6 +5,10 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+/**
+ * Classe représentant une entité utilisateur
+ *
+ */
 @Entity(tableName = "users")
 public class Users implements Serializable {
     private String Nom;

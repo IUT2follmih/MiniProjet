@@ -20,34 +20,56 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activité principale de l'application
+ * Qui permet de lister les utilisateurs
+ * et de les supprimer
+ */
 public class MainActivity extends AppCompatActivity {
 
+    // Constantes
     private DataBaseClient maBase;
     private UserAdaptater adaptater;
+    boolean isVue = false;
+
+    // Composants graphiques
     Button btnAno;
     Button btnCrea;
     ListView userList;
     TextView txtListVide;
-    boolean isVue = false;
 
+    /**
+     * Méthode appelée à la création de l'activité
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialisation de la base de données
         maBase = DataBaseClient.getInstance(getApplicationContext());
 
+        // Récupération des composants graphiques
         btnAno = findViewById(R.id.Main_btn_Ano);
         btnCrea = findViewById(R.id.Main_btn_crea);
         txtListVide = findViewById(R.id.Main_text_list_vide);
 
         userList = findViewById(R.id.Main_list_users);
 
+        // Création de l'adapter et association à la liste
         adaptater = new UserAdaptater(this, new ArrayList<Users>());
         userList.setAdapter(adaptater);
 
+        // Gestion de la vue vide
         userList.setEmptyView(txtListVide);
 
+        /**
+         * Gestion des événements sur la liste des utilisateurs
+         * - clic simple pour sélectionner un utilisateur
+         * - clic long pour supprimer un utilisateur
+         */
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         userList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 // Récupération de la tâche cliquée à l'aide de l'adapter
                 Users user = adaptater.getItem(position);
 
+                // Affichage d'une boîte de dialogue pour confirmer la suppression
                 new MaterialAlertDialogBuilder(MainActivity.this)
                         .setTitle("Suppression")
                         .setIcon(R.drawable.baseline_info_24)
@@ -81,10 +103,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Gestion de l'événement sur le bouton "Anonyme"
         btnAno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Si l'utilisateur n'a pas encore été invité à choisir entre un compte anonyme et un compte existant
                 if (!isVue) {
+                    // Affichage d'une boîte de dialogue pour confirmer le choix
                     new MaterialAlertDialogBuilder(MainActivity.this)
                             .setTitle("Voulez vous continuer en anonyme ?")
                             .setIcon(R.drawable.baseline_warning_24)
@@ -106,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Gestion de l'événement sur le bouton "Créer un compte"
         btnCrea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +141,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Méthode permettant de lancer l'activité ListeExoActivity
+     * en passant en paramètre l'utilisateur sélectionné
+     * @param user
+     * @param anonyme
+     */
     public void giveUser(Users user, boolean anonyme) {
         Intent intent = new Intent(MainActivity.this, ListeExoActivity.class);
         intent.putExtra(String.valueOf(ListeExoActivity.ANONYME), anonyme);
@@ -124,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Méthode permettant de récupérer la liste des utilisateurs
+     * et de les afficher dans la liste
+     */
     private void getUsers() {
         class GetUsers extends AsyncTask<Void, Void, List<Users>> {
 
@@ -143,15 +179,19 @@ public class MainActivity extends AppCompatActivity {
                 adaptater.clear();
                 adaptater.addAll(users);
 
-                // Now, notify the adapter of the change in source
+                // Notifier l'adapter du changement
                 adaptater.notifyDataSetChanged();
             }
         }
 
+        // Exécution de la tâche asynchrone
         GetUsers gu = new GetUsers();
         gu.execute();
     }
 
+    /**
+     * Méthode appelée à l'affichage de l'activité
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -170,7 +210,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 //
+
+    /**
+     * Méthode permettant de supprimer un utilisateur de la base de données
+     * @param position position de l'utilisateur dans la liste
+     */
     private void supprUser(int position) {
+        // Récupération de l'utilisateur à supprimer
         final Users user = adaptater.getItem(position);
         class SupprUser extends AsyncTask<Void, Void, Users> {
             @Override
@@ -188,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // Exécution de la tâche asynchrone
         SupprUser spu = new SupprUser();
         spu.execute();
     }

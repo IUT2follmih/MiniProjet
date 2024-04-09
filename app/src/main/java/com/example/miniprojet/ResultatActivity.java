@@ -1,7 +1,6 @@
 package com.example.miniprojet;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,21 +14,30 @@ import com.example.miniprojet.dataBase.Users;
 
 import java.io.Serializable;
 
+/**
+ * Activité permettant d'afficher le résultat d'un exercice
+ */
 public class ResultatActivity extends AppCompatActivity implements Serializable {
+    // Variables
     public static Users USER;
-
     public static String NOM_EXO = "NOMEXO";
     public static String NB_ERROR = "0";
     public static String TABLE_KEY = "1";
+
+    // Composants graphiques
     Button btnReExo, btnReUser, btnRecomecer;
     TextView name, note, result;
 
-    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
+    /**
+     * Méthode appelée à la création de l'activité
+     * @param savedInstanceState état de l'activité
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultat);
 
+        // Récupération des composants graphiques
         btnReExo = findViewById(R.id.Result_btn_retour_exo);
         btnReUser = findViewById(R.id.Result_btn_retour_comptes);
         btnRecomecer = findViewById(R.id.Result_btn_recommencer);
@@ -38,9 +46,11 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
         note = findViewById(R.id.Result_text_note);
         result = findViewById(R.id.Result_text_result);
 
+        // Récupération des informations
         String nomExo = getIntent().getStringExtra(NOM_EXO);
         Integer errors = getIntent().getIntExtra(NB_ERROR, 0);
 
+        // Récupération de l'utilisateur
         Users user = (Users) getIntent().getSerializableExtra(String.valueOf(USER));
 
         name.setText("Resultat de l'exercice : " + nomExo);
@@ -52,6 +62,13 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
             note.setTextColor(Color.GREEN);
             result.setText("Vous avez réussi l'exercice !!");
         }
+
+        /**
+         * Gestion des événements sur les boutons de l'activité :
+         * - btnReExo : retour à la liste des exercices
+         * - btnReUser : retour à la page de connexion
+         * - btnRecomecer : recommencer l'exercice
+         */
         btnRecomecer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +146,9 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
         });
     }
 
+    /**
+     * Méthode appelée lors de l'appui sur le bouton retour du téléphone
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
