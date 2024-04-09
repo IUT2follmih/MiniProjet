@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,10 +27,9 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
 
     LinearLayout linear;
     Button valider;
-    TextView calcul;
+    TextView calcul, timer;
     EditText resultat;
-    LinearLayout layout;
-
+    RelativeLayout layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +37,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
 
         linear = findViewById(R.id.Table_mult_res_layout);
         valider = findViewById(R.id.Table_mult_res_btn);
+        timer = findViewById(R.id.Table_mult_timer);
 
         ArrayList<EditText> resList = new ArrayList<>();
 
@@ -61,6 +62,17 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
             linear.addView(linearTMP);
         }
 
+        new CountDownTimer(60000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                timer.setText("Temps restant: " + millisUntilFinished / 1000 + "s");
+            }
+
+            public void onFinish() {
+                Toast.makeText(TableDeMultiplicationReponsesActivity.this, "Temps écoulé", Toast.LENGTH_SHORT).show();
+                valider.callOnClick();
+            }
+        }.start();
+
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +84,6 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
                     }
                 }
                 Integer nbErr = tableMult.getNbErreurs();
-                Toast.makeText(TableDeMultiplicationReponsesActivity.this, "Bon!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TableDeMultiplicationReponsesActivity.this, ResultatActivity.class);
                 intent.putExtra(String.valueOf(ResultatActivity.USER), user);
                 intent.putExtra(ResultatActivity.NOM_EXO, "Table de multiplication");

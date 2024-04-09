@@ -40,4 +40,5 @@
     <string name="QCM_reponses_question">La question</string>
     <string name="QCM_reponses_btn_suivant">Suivant</string>
     <string name="QCM_reponses_error">Veuillez sélectioner une réponse</string>
+    <string name="Table_add_timer">timer</string>
 </resources>

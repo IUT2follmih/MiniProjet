@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -28,9 +29,9 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
 
     LinearLayout linear;
     Button valider, retour;
-    TextView calcul;
+    TextView calcul, timer;
     EditText resultat;
-    LinearLayout layout;
+    RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
 
         linear = findViewById(R.id.Table_add_res_layout);
         valider = findViewById(R.id.Table_add_res_btn);
+        timer = findViewById(R.id.Table_add_timer);
         retour = findViewById(R.id.Table_add_retour_btn);
 
         ArrayList<EditText> resList = new ArrayList<>();
@@ -52,14 +54,25 @@ public class TableAdditionReponsesActivity extends AppCompatActivity implements 
         for (Addition add : tableAdd.getAdditions()) {
             LinearLayout linearTMP = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
 
-            calcul = (TextView) linearTMP.findViewById(R.id.template_calcul);
+            calcul = linearTMP.findViewById(R.id.template_calcul);
             calcul.setText(add.getA() + "+" + add.getB() + "=");
 
-            resultat = (EditText) linearTMP.findViewById(R.id.template_resultat);
+            resultat = linearTMP.findViewById(R.id.template_resultat);
 
             resList.add(resultat);
             linear.addView(linearTMP);
         }
+
+        new CountDownTimer(60000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                timer.setText("Temps restant: " + millisUntilFinished / 1000 + "s");
+            }
+
+            public void onFinish() {
+                Toast.makeText(TableAdditionReponsesActivity.this, "Temps écoulé", Toast.LENGTH_SHORT).show();
+                valider.callOnClick();
+            }
+        }.start();
 
 
         valider.setOnClickListener(view -> {
