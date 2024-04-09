@@ -128,4 +128,10 @@ public class ResultatActivity extends AppCompatActivity implements Serializable 
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        btnReExo.callOnClick();
+    }
 }

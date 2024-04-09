@@ -26,7 +26,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
     public static String TABLE_KEY = "1";
 
     LinearLayout linear;
-    Button valider;
+    Button valider, retour;
     TextView calcul, timer;
     EditText resultat;
     RelativeLayout layout;
@@ -37,6 +37,7 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
 
         linear = findViewById(R.id.Table_mult_res_layout);
         valider = findViewById(R.id.Table_mult_res_btn);
+        retour = findViewById(R.id.Table_mult_retour_btn);
         timer = findViewById(R.id.Table_mult_timer);
 
         ArrayList<EditText> resList = new ArrayList<>();
@@ -100,6 +101,10 @@ public class TableDeMultiplicationReponsesActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
+        });
+
+        retour.setOnClickListener(view -> {
+            finish();
         });
 
     }
